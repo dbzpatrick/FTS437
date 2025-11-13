@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>FTS437 Vehicle Model Lap Time Simulation Development and Optimization</title>
+  <title>FTS437: Vehicle Model Lap Time Simulation Development and Optimization</title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
@@ -31,19 +31,63 @@
   <script src="./components/table-component/table-component.js"></script>
 
   <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+  <link id="theme-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
+  <link id="theme-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css" disabled />
 </head>
 
 <body>
   <div class="content">
-    <h1>FTS-437 FSAE Lap Time Simulation Vehicle Model Development and Optimization</h1>
+    <nav class="top-nav">
+      <sl-button variant="text" size="medium" class="nav-active">
+        <sl-icon slot="prefix" name="file-text"></sl-icon>
+        Interim Report
+      </sl-button>
+      <sl-button variant="text" size="medium" href="https://github.com/nusfsae/NUS_LTS" target="_blank">
+        <sl-icon slot="prefix" name="github"></sl-icon>
+        GitHub
+      </sl-button>
+      <sl-button variant="text" size="medium" href="https://linkedin.com/in/baizhou-patrick-dai" target="_blank">
+        <sl-icon slot="prefix" name="linkedin"></sl-icon>
+        LinkedIn
+      </sl-button>
+    </nav>
+  
+    <h1>FTS-437: FSAE Lap Time Simulation Vehicle Model Development and Optimization</h1>
 
     <!-- This is the team member component use to display details about your team members -->
     <div class="team-member-wrapper">
-      <team-member avatar="assets/blackranger.png" name="Dai Baizhou Patrick" department="Mechanical Engineering"
+      <team-member avatar="assets/patrick.png" name="Dai Baizhou Patrick" department="Mechanical Engineering"
         year="AY25/26"></team-member>
     </div>
 
+    <!-- Dark Mode Toggle -->
+    <div style="text-align: right">
+      <sl-switch id="dark-mode-toggle">Dark Mode</sl-switch>
+    </div>
+
     <!-- This is a divide from the shoelace library for aesthetic purpose -->
+    <sl-divider></sl-divider>
+    <div>
+      <h2> Contact Information</h2>
+      <p>
+        Email: baizhou.dai@u.nus.edu or patrick.dai@yahoo.com
+      </p>
+      <p>        
+        Mobile: +65 88635872
+      </p>
+    </div>
+    <sl-divider></sl-divider>
+
+    <div>
+      <h2> Overview </h2>
+      <p>
+        This is an Interim Report
+      </p>
+      <p>
+        Word Count: 2912
+      </p>
+    </div>
     <sl-divider></sl-divider>
 
     <!-- This is the table-of-content component use to define all of the link directly to each section -->
@@ -51,31 +95,76 @@
       <h2>Table of Contents</h2>
       <sl-tree>
         <sl-tree-item expanded>
-          <a href="#section-header-1">1. Section Header 1</a>
+          <a href="#section-header-1">1. Introduction</a>
           <sl-tree-item>
-            <a href="#sub-section-1-header-1">1.1. Sub-section Header 1</a>
+            <a href="#sub-section-1-1">1.1 Introduction to NUS Formula SAE</a>
           </sl-tree-item>
           <sl-tree-item>
-            <a href="#sub-section-1-header-2">1.2. Sub-section Header 2</a>
+            <a href="#sub-section-1-2">1.2 Introduction to Lap Time Simulation</a>
           </sl-tree-item>
         </sl-tree-item>
 
         <sl-tree-item expanded>
-          <a href="#section-header-2">2. Section Header 1</a>
+          <a href="#section-header-2">2. Problem Definition</a>
+        </sl-tree-item>
+
+        <sl-tree-item expanded>
+          <a href="#section-header-3">3. Design Statement</a>
+        </sl-tree-item>
+
+        <sl-tree-item expanded>
+          <a href="#section-header-4">4. Detail Design</a>
           <sl-tree-item>
-            <a href="#sub-section-2-header-1">2.1. Sub-section Header 1</a>
+            <a href="#sub-section-4-1">4.1 Revamped Structure</a>
           </sl-tree-item>
           <sl-tree-item>
-            <a href="#sub-section-2-header-2">2.2. Sub-section Header 2</a>
+            <a href="#sub-section-4-2">4.2 What should a Performance Envelope be like</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-4-3">4.3 How to obtain the Performance Envelope</a>
+          </sl-tree-item>
+        </sl-tree-item>
+
+        <sl-tree-item expanded>
+          <a href="#section-header-5">5. Prototyping</a>
+          <sl-tree-item>
+            <a href="#sub-section-5-1">5.1. Steady-State Simulation</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-5-2">5.2 Quasi-Steady-State Simulation</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-5-3">5.3 Optimization Success Rate</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-5-4">5.4 Speed Profile</a>
+          </sl-tree-item>
+        </sl-tree-item>
+
+        <sl-tree-item expanded>
+          <a href="#section-header-6">6. Testing</a>
+        </sl-tree-item>
+
+        <sl-tree-item expanded>
+          <a href="#section-header-5">7. Future Work</a>
+          <sl-tree-item>
+            <a href="#sub-section-7-1">7.1 Optimization Success Rate</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-7-2">7.2 Model Complexity and Insights</a>
+          </sl-tree-item>
+          <sl-tree-item>
+            <a href="#sub-section-7-3">7.3 Future Work Timeline</a>
           </sl-tree-item>
         </sl-tree-item>
 
         <sl-tree-item>
-          <a href="#references">References</a>
+          <a href="#references">A. References</a>
         </sl-tree-item>
       </sl-tree>
     </div>
     <sl-divider></sl-divider>
+
 
     <div>
 
@@ -84,7 +173,7 @@
         <h2> 1. Introduction </h2>
       </div>
 
-      <div id="sub-section-1-header-1">
+      <div id="sub-section-1-1">
         <h3>1.1 Introduction to NUS FSAE</h3>
         <p>
           Formula SAE (FSAE) is an international intervarsity competition organized by the Society of Automotive 
@@ -98,7 +187,7 @@
         </p>
       </div>
 
-      <div id="sub-section-1-header-2">
+      <div id="sub-section-1-2">
         <h3>1.2 Introduction to Lap Time Simulation</h3>
         <p>
           Lap Time Simulation (LTS) is a computational tool used to predict a vehicle’s maximum on-track
@@ -107,10 +196,11 @@
           none were built in a systematic or scalable manner. The most recent version of the self-developed LTS
           tool was authored by me, beginning in May 2024, and is based on a two-wheel (bicycle) vehicle model. 
         </p>
-
+        <br />
         <!-- This is an example of how you might use the image component -->
-        <image-component tag="image" source="assets/requirement.png"
+        <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
           subtitle="Figure 1: Vehicle Dynamics Bicycle Vehicle Model"></image-component>
+        
       </div>
     </div>
 
@@ -148,11 +238,11 @@
           finished all dynamic events in top 10. While this marks a substantial achievement, the team also 
           sees a big room for improvement and hence decided to continue focusing on enhancing the car’s dynamics 
           performance. Therefore, the team goal of this season was set as:  
-        </p><p>
+        </p><p style="text-align: center;">
           “Extract maximum performance through improved reliability” 
         </p><p>
           To facilitate this, the goal for Lap Time Simulation department was set and therefore the Design Statement of the system:
-        </p><p>
+        </p><p style="text-align: center;">
           “Develop Lap Time Simulation software with correctness, accuracy and computational efficiency.”    
         </p>
       </div>
@@ -163,23 +253,346 @@
     <div>
       <div id="section-header-4">
         <h2>4. Detail Design</h2>
-        <div id="sub-section-1-header-1">
+        <p>
+          LTS26 was constructed with more than 2000 lines of code on MATLAB. It utilizes Nonlinear Optimization 
+          method with the help of CasADi to evaluate vehicle performance at around 500 query points with extrapolation
+           to generalize it. It outputs insightful results for any dynamic events in the competition with less than half the computation time as 
+          the previous tool, including lap time, car speed over distance, accelerations, etc.
+        </p>
+        <div id="sub-section-4-1">
           <h3>4.1 Revamped Structure</h3>
           <p>
-            One of the main reasons LTS25 having slow computation speed was that its processing time scaled directly 
-            with the number of mesh points in the track model. For instance, a long track modelled with high precision 
-            could contain around 1,000 data points — meaning 1,000 individual calculations would need to be performed. 
-            At each of these points, the simulation independently evaluates the vehicle’s ability to corner, accelerate, 
-            and brake. As a result, the simulation output is updated sequentially, point by point, as the calculations progress.  
-          </p><p>
-            To reduce computation time, the new framework was designed to evaluate vehicle performance independently of 
-            the racetrack. Instead of calculating the vehicle’s behaviour point by point along the track, the simulation 
-            first generates a comprehensive summary of the vehicle’s performance for a given setup — known as the Performance 
-            Envelope — which can then be applied to any racetrack the team wishes to simulate. Since a race car’s maximum performance 
-            varies under different conditions, a generalized envelope is constructed by evaluating the vehicle across a range of operating 
-            conditions, followed by interpolation between these data points. 
-            Further details of this process are explained in the following sections. 
+            One of the main reasons LTS25 having slow computation speed was that its processing time scaled
+             directly with the number of mesh points in the track model. For instance, a long track modelled with 
+             high precision could contain around 1,000 data points — meaning 1,000 individual calculations would need 
+             to be performed. At each of these points, the simulation independently evaluates the vehicle’s ability to 
+             corner, accelerate, and brake. As a result, the simulation output is updated sequentially, point by point, 
+             as the calculations progress. 
           </p>
+          <br />
+            <image-component tag="image" source="assets\images\LTS25 Simulation Structure.jpg"
+            subtitle="Figure 2: LTS25 Simulation Structure"></image-component> 
+          <p>
+            To reduce computation time, the new framework was designed to evaluate vehicle 
+            performance independently of the racetrack. Instead of calculating the vehicle’s behaviour point by point along the track, 
+            the simulation first generates a comprehensive summary of the vehicle’s performance for a given setup — known as the Performance 
+            Envelope — which can then be applied to any racetrack the team wishes to simulate. Since a race car’s maximum performance varies 
+            under different conditions, a generalized envelope is constructed by evaluating the vehicle across a range of operating conditions, 
+            followed by interpolation between these data points. Further details of this process are explained in the following sections.
+          </p>
+          <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 3: LTS26 Simulation Structure"></image-component>
+          </p>
+
+        <div id="sub-section-4-2">
+          <h3>4.2 What should a Performance Envelope be like</h3>
+          <p>
+            A Performance Envelope of a racing vehicle should comprehensively describe the maximum limits of its dynamic performance across 
+            all possible operating scenarios. These limits are constrained by both tire dynamics and the available traction from the powertrain 
+            system. In the design of LTS26, the Performance Envelope is represented by the vehicle’s G-G-V Diagram, which characterizes its 
+            acceleration capabilities in longitudinal and lateral directions at varying speeds, 
+            and to evaluate the vehicle’s performance limit, the racing tires should be focused first.
+          </p>
+          <div id="sub-section-4-2-1">
+            <h4>4.2.1 Tire Traction Circle </h4>
+            <p>
+              The tire is the only component that connects the vehicle to the ground, determining how much force can be transmitted to generate 
+              acceleration or deceleration. The tire’s grip, represented by its coefficient of friction, is limited and generally constant under 
+              steady-state conditions. This available grip can be utilized in the longitudinal direction (x-axis), the lateral direction (y-axis), 
+              or as a combination of both. Consequently, when the available friction is distributed between these two directions, the resultant force 
+              capability forms a circle. This relationship is known 
+              as the Friction Circle, a fundamental concept in racing tire dynamics.
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\Racing Tires Friction Circle.jpg"
+            subtitle="Figure 4: Racing Tires Friction Circle"></image-component>
+            
+            </h4>
+          </div>
+          
+          <div id="sub-section-4-2-2">
+            <h4>4.2.2 G-G Diagram</h4>
+            <p>
+              While the Friction Circle defines the grip limits of the racing tires, a race car’s overall dynamic potential is also constrained by 
+              other subsystems beyond the tires. For an FSAE vehicle, its achievable acceleration is sometimes capped below the tire’s theoretical limit. 
+              To translate the tire-level performance limits into actual vehicle behaviour, it is necessary to construct a G–G diagram for the vehicle. 
+              This diagram captures the combined effects of all major systems — including aerodynamics, powertrain, 
+              and suspension kinematics — to represent the car’s true performance envelope. 
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\G-G Diagram.jpg"
+            subtitle="Figure 5: G-G Diagram"></image-component>
+
+          </div>
+          <div id="sub-section-4-2-3">
+            <h4>4.2.3 G-G-V Diagram</h4>
+            <p>
+              Many of a vehicle’s performance characteristics vary with speed. For instance, aerodynamic downforce increases with the square of the 
+              vehicle’s velocity, which in turn affects the normal load on the tires and consequently alters the shape of the G–G diagram. As a result, 
+              the G–G diagram changes with speed, reflecting different performance limits at different operating conditions. Therefore, it is essential to 
+              account for the G–G diagrams across the entire speed range of the vehicle to
+               obtain a complete and accurate representation of its overall performance.
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram at different speeds"></image-component>
+            <p>
+              By combining the G-G Diagram at all speeds that a vehicle could possibly run at, it is possible to obtain a full three-dimensional graph 
+              that covers the vehicle’s dynamic limit in all conditions, the G-G-V Diagram. 
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\G-G-V Diagram.jpg"
+            subtitle="Figure 7: G-G-V Diagram"></image-component>
+            <p>
+              Ideally, the vehicle should operate along the boundary of this diagram, and any point within it indicates that the driver is not extracting 
+              the car’s full potential. Therefore, the objective of the simulation is to accurately determine the 
+              G–G–V diagram for a given setup of the FSAE race car — which fundamentally defines its Performance Envelope.
+            </p>
+            </h4>
+          </div> 
+        </div>
+        <div id="sub-section-4-3"></div> 
+          <h3>4.3 How to obtain the Performance Envelope</h3>
+          <p>
+            To derive a Performance Envelope that accurately represents the FSAE vehicle’s dynamic performance limits, 
+            the steady-state behaviour of the vehicle at a 
+            given speed must first be evaluated, ultimately leading to the construction of the G–G–V diagram. 
+          </p>
+          <p>
+            Since the vehicle system consists of numerous interdependent equations and unknown variables, evaluating 
+            each equation individually would be both complex and computationally inefficient. Instead, the problem is 
+            solved using numerical optimization, which allows simultaneous evaluation of multiple decision variables.  
+            In this work, an open-source tool for nonlinear optimization and algorithmic differentiation tool, CasADi, 
+            was used (Joel A E Andersson, Joris Gillis, Greg Horn, James B Rawlings, Moritz Diehl, 2019),
+             coupled with the Interior-Point Optimization Method (IPOPT) as the chosen solver.
+          </p>
+          <p>
+            Nonlinear programming is the process of solving an optimization problem where some of the constraints are not linear equalities 
+            or the objective function is not a linear function. In the context of a 2D problem, the goal is to find the global minimum point over a 
+            specific domain. The problem becomes significantly more complex as the number of variables and constraints increases.
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Visualization of non-linear optimization.jpg"
+            subtitle="Figure 8: Visualization of non-linear optimization"></image-component>
+          <p>
+            To perform nonlinear optimization using a solver such as IPOPT, the problem must first be formulated by defining the decision variables, 
+            objective function, constraints, initial guesses, and numerical bounds. CasADi then symbolically constructs the optimization problem and 
+            interfaces with IPOPT to compute the optimized decision variables and their corresponding objective function value. 
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Functional block diagram of the nonlinear optimization methodology.jpg"
+            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology"></image-component>
+          <p>
+            Therefore, to obtain accurate vehicle dynamics simulation results using CasADi, all input parameters must be correctly defined at each 
+            iteration. In this case, the objective function consists of a comprehensive set of vehicle dynamics equations that describe the behaviour 
+            of the model. Meanwhile, the initial guesses and optimization constraints are 
+            defined based on the actual physical limits and operating conditions of the race car.
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Flow chart of vehicle performance evaluation.jpg"
+            subtitle="Figure 10: Flow chart of vehicle performance evaluation"></image-component>
+        </div>
+      </div>
+<!-- section 5 -->
+    <br />
+    <br />
+    <sl-divider></sl-divider>
+      <div id="sub-section-5"></div>
+        <h2>5.Prototyping</h2>
+        <div id="sub-section-5-1"></div>
+          <h3>5.1 Steady-State Simulation</h3>
+          <p>
+            As discussed earlier, the first step in the simulation process is to find out the dynamic limit, in both longitudinal and lateral, 
+            of the vehicle under a steady-state condition. In other words, to find out the G–G diagram of the vehicle at a specific speed.
+          </p>
+          <p>
+            The first design iteration of achieving this goal was to maximize the lateral acceleration (Ay) at each swept Ax values. To begin with, 
+            the maximum and minimum values of Ax must be found first by setting Ay to zero at both of their optimization framework. Initial guesses of 
+            the relevant decision variables are set according to straight-line conditions as well to provide a closer guess. The program then generates 
+            a mesh grid of Ax, and for each iterated Ax, optimize for the maximum value of Ay. This will output a set of Ax and Ay values, 
+            forming the G-G diagram as demanded.
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+            subtitle="Figure 11: First Prototype Visualization"></image-component>
+          <p>
+            However, this design has notable limitations. It requires at least three separate nonlinear optimization setups within the program, 
+            making maintenance and updates cumbersome. Furthermore, testing revealed that the 
+            initial query points for Ay often experienced a high rate of optimization failure due to tight constraints.
+          </p>
+          <p>
+            To tackle the issue and optimize the design, a second design was proposed. The optimization problem no longer seeks for optimizing either 
+            decision variable Ax or Ay, but a grip factor P by│P│=√(〖Ax〗^2+〖Ay〗^2 ), which measures the total acceleration of the vehicle. As the aim 
+            is to find the combination of maximum longitudinal and lateral acceleration, the problem was essentially converted to maximize the value of P. 
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+            subtitle="Figure 12: Second Prototype Visualization"></image-component>
+          <p>
+            The program first defines an angle variable, θ (Theta), and generates a mesh grid ranging from π to –π. Using this, a constraint is applied 
+            such that Ax/Ay = tan(θ) at each point of interest, ensuring that the iterations are evenly distributed across all directions of acceleration. 
+            For each iteration, 
+            the decision variable P is then maximized, and a corresponding set of optimized (Ax, Ay) values is obtained as the output. 
+          </p>
+        <div id="sub-section-5-2"></div>
+         <h3>5.2 Quasi-Steady-State Simulation</h3>
+          <p>
+            By repeating this process for each vehicle speed, a Quasi-steady-state simulation can be completed, meaning the process of performing of 
+            Steady-state simulation at multiple different states. 
+            This will construct a full G–G–V diagram by combining the G-G diagram obtained at different speeds. 
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Simulated G-G Diagram at different speeds.jpg"
+            subtitle="Figure 13: Simulated G-G Diagram at different speeds"></image-component>
+          <p>
+            The G-G diagram calculations were performed at speeds ranging from 10 meters per second up to the vehicle’s maximum theoretical speed, 
+            with a constant increment of 1 meter per second. Speeds below 10 meters per second were excluded, as the vehicle is unlikely to operate 
+            in that range during dynamic events, and its behaviour at such low speeds differs significantly, often causing the optimization solver to 
+            fail. Instead, extrapolation 
+            was applied to extend the G-G-V diagram and estimate the vehicle’s performance below 10 meters per second.
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\Interpolation of G-G-V Diagram.jpg"
+            subtitle="Figure 14: Interpolation of G-G-V Diagram"></image-component>
+        <div id="sub-section-5-3">
+          <h3>5.3 Optimization Success Rate</h3>
+           <p>
+            At each point of interest, numerical optimization is performed to determine the optimal set of decision variables. Since a general 
+            configuration of numerical constraints and initial guesses is applied uniformly across all instances, certain optimizations may fail 
+            due to infeasibility or nonlinearity. To prevent these failures from interrupting the overall simulation process, a try–catch structure 
+            is implemented, allowing the program to skip any failed instances automatically. At the end of the simulation, a success rate is computed 
+            as the ratio of successful optimizations 
+            to the total number of optimization attempts, providing a metric to access the credibility of per simulation.
+           </p>
+           <br />
+              <image-component tag="image" source="assets\images\Flow chart of optimization in loop.jpg"
+            subtitle="Figure 15: Flow chart of optimization in loop"></image-component>
+           <p>
+            To increase the success rate, several additional design choices were implemented. For example, at each optimization query point, the 
+            initial guesses for the decision variables are set to the optimized values obtained from the previous query point. This ensures, first, 
+            that the optimization problem remains feasible because the initial values come from the program rather than arbitrary human guesses, and 
+            second, that the initial guesses are close to the true solutions since consecutive query points are adjacent to each other. 
+            Other examples include changing numerical constraints for certain decision variables at higher speed regime.
+           </p>
+        </div>
+        <div id="sub-section-5-4">
+          <h3>5.4 Speed Profile</h3>
+           <p>
+            With the vehicle’s performance limits established, it becomes possible to predict its dynamic capabilities on an actual competition 
+            track, such as during the Endurance event. To achieve this, a Boundary Speed Profile (BSP) is first generated, representing the vehicle’s 
+            maximum achievable cornering speed along the track, following by calculating 
+            the maximum speed with limited acceleration and braking, which outputs the Limit Speed Profile (LSP).
+           </p>
+           <p>
+            Using the interpolated G-G-V diagram obtained earlier, the program determines the maximum possible lateral acceleration, Ay, for each 
+            speed value, which represents the vehicle’s peak cornering capability at that speed. The program then computes the minimum achievable turn 
+            radius for each speed–acceleration combination. 
+            The discrete results are then interpolated to generalize the data across all possible cornering scenarios.
+           </p>
+           <br />
+              <image-component tag="image" source="assets\images\Cornering Speed against Radius.jpg"
+            subtitle="Figure 16: Cornering Speed against Radius"></image-component>
+           <p>
+            The program maps the cornering speed to the corresponding turn radius if the specific segment has a turn radius less than 50 meters, else, 
+            put the maximum vehicle speed. As such, the BSP was obtained.
+           </p>
+           <br />
+              <image-component tag="image" source="assets\images\Track Model and Boundary Speed Profile.jpg"
+            subtitle="Figure 17: Track Model and Boundary Speed Profile"></image-component>
+           <p>
+            Then, the objective shifts to determining the vehicle’s maximum possible acceleration at each point, to predict the highest attainable speed 
+            at the next position after acceleration. Given the speed and turn radius from the BSP, since both speed and lateral acceleration are known, 
+            the corresponding longitudinal acceleration, Ax, can be obtained from the G-G-V diagram.
+           </p>
+           <p>
+            However, since the G-G-V diagram represents both acceleration and braking conditions, a given combination of speed and lateral acceleration 
+            yields two possible Ax values — one positive (acceleration) and one negative (braking). Therefore, the G-G-V diagram must be divided into two 
+            separate regions, 
+            allowing the program to independently extract acceleration and braking data.
+           </p>
+           <br />
+              <image-component tag="image" source="assets\images\Performance Envelope for Acceleration.jpg"
+            subtitle="Figure 18: Performance Envelope for Acceleration"></image-component>
+           
+            <br />
+              <image-component tag="image" source="assets\images\Performance Envelope for Braking.jpg"
+            subtitle="Figure 19: Performance Envelope for Braking"></image-component>
+            <p>
+            Two separate for-loops were implemented to update the speed values derived from the Boundary Speed Profile. The first loop evaluates the 
+            maximum possible acceleration at each instance using the Performance Envelope for acceleration, 
+            and the second loop calculates the braking. As a result, the complete Speed Profile is obtained.
+           </p>
+        </div>
+<!-- section 6 -->
+    <br />
+    <br />
+    <sl-divider></sl-divider>
+      <div id="sub-section-6">
+        <h2>6. Testing</h2>
+        <p>
+          The simulation results were tested and validated by comparing them against telemetry data from the NUS FSAE vehicle of the previous season, 
+          R25E, recorded during the Endurance event at the 2025 FSAE Electric Competition. The lap time simulation using the newly developed LTS26 model 
+          was conducted under identical conditions to 
+          those of R25E, as well as the earlier LTS25 model, to ensure a fair and consistent comparison.
+        </p>
+        <p>
+          The simulation results showed that the predicted speed profile closely matched the telemetry data recorded during competition, both in overall 
+          driving patterns and in maximum cornering speeds. The simulated results also reproduced similar acceleration and braking locations on the track 
+          as those of the competition driver, 
+          although the actual driver generally braked earlier due to risk management and individual driving style.
+        </p>
+        <p>
+          However, discrepancies between the simulated and recorded speed profiles were observed primarily during acceleration phases and on track segments 
+          with complex geometry. The program tended to overestimate R25E’s acceleration performance, as it was based on theoretical motor characteristics. 
+          In reality, the powertrain system experienced significant 
+          performance degradation due to thermal limitations and reduced efficiency during competition. 
+        </p>
+        <p>
+          In addition, the simulation could not fully replicate the dynamic behaviour of a human driver in sections such as slaloms, 
+          where the turn radius changes rapidly over short distances. The simulation seeks to minimize total lap time by accelerating whenever possible, 
+          while a human driver prioritizes maintaining smooth and stable throttle control in these conditions.
+        </p>
+        <p>
+          Despite these limitations, LTS26 demonstrated a substantial improvement in computational efficiency. As a four-wheel quasi-steady-state model, 
+          it required only about half the computation time of LTS25, which operated on a simpler bicycle model. This improvement not only fulfils the 
+          development goals set at the beginning of the season but also highlights 
+          the potential for future expansion of the vehicle model toward greater complexity and accuracy.
+        </p>
+
+      </div>
+      <div id="sub-section-7">
+  <!-- section 7 -->
+    <br />
+    <br />
+    <sl-divider></sl-divider>
+        <h2>7. Future Work</h2>
+        <div id="sub-section-7-1">
+          <h3> 7.1 Optimization Success Rate</h3>
+          <p>
+            Although a few optimization failures can be compensated for through interpolation with neighbouring results, excessive failures lead to 
+            distortions in the G-G-V diagram and prevent it from accurately representing the vehicle’s true performance. Therefore, reducing the number 
+            of optimization failures is critical to improving the overall 
+            accuracy of the simulation. This will be the key focus in the next stage of program optimization and development.
+          </p>
+
+        </div>
+        <div id="sub-section-7-2">
+          <h3> 7.2 Model Complexity and Insights</h3>
+          <p>
+            The current version of the LTS26 Lap Simulation employs a four-wheel vehicle model but maintains only three degrees of freedom 
+            (longitudinal motion, lateral motion, and yaw). Moving forward, the model will be expanded to include seven degrees of freedom by 
+            incorporating the rotational speeds of all four individual wheels. Further development aims to extend the model to 
+            fourteen degrees of freedom, allowing the suspension system of each corner to be represented independently.
+          </p>
+          <p>
+            In addition, the simulation tool will be enhanced to provide more comprehensive insights into vehicle performance beyond speed and acceleration, 
+            including tire slip angles, optimal driver inputs, and aerodynamic maps, among others.
+          </p>
+        </div>
+        <div id="sub-section-7-3">
+          <h3> 7.3 Future Work Timeline</h3>
+        </div>
       </div>
     </div>
 
@@ -205,15 +618,43 @@
     </div>
   </div>
 
-  <!-- This is the code to display the scroll to top button for ergonomic -->
-  <!-- You can leave it as it is, or if you don't like its aesthetics you can also just delete it, -->
-  <!-- but it might reduce the user experience. -->
+  <!-- dark mode -->
   <sl-button class="scroll-to-top" variant="primary" size="medium" circle onclick="scrollToTop()">
     <sl-icon name="arrow-up" label="Settings"></sl-icon>
   </sl-button>
 
   <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script type="module" src="./components/table-component/table-component.js"></script>
+
+  <script>
+  const toggle = document.getElementById('dark-mode-toggle');
+  const lightTheme = document.getElementById('theme-light');
+  const darkTheme = document.getElementById('theme-dark');
+  
+  // Check for saved preference
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    lightTheme.disabled = true;
+    darkTheme.disabled = false;
+    toggle.checked = true;
+  }
+  
+  toggle.addEventListener('sl-change', (e) => {
+    if (e.target.checked) {
+      document.body.classList.add('dark-mode');
+      lightTheme.disabled = true;
+      darkTheme.disabled = false;
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.body.classList.remove('dark-mode');
+      lightTheme.disabled = false;
+      darkTheme.disabled = true;
+      localStorage.setItem('darkMode', 'false');
+    }
+  });
+</script>
 </body>
 
 </html>

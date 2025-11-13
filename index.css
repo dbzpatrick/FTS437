@@ -9,10 +9,73 @@ body {
 .content {
   max-width: 800px;
   margin: auto;
-  padding: 10%;
+  padding: 0rem 10% 10% 10%;
 }
 
 p {
   text-align: justify;
   font-size: 1.1rem;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .content {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4 {
+  color: #ffffff;
+}
+
+body.dark-mode p {
+  color: #d0d0d0;
+}
+
+body.dark-mode a {
+  color: #4dabf7;
+}
+
+body.dark-mode .table-of-content {
+  background-color: #2d2d2d;
+  border: 1px solid #404040;
+}
+
+.top-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--sl-color-neutral-200);
+}
+
+.top-nav sl-button {
+  font-size: 1rem;
+}
+
+.top-nav .nav-active {
+  color: var(--sl-color-primary-600);
+  font-weight: 600;
+}
+
+/* Dark mode */
+body.dark-mode .top-nav {
+  border-bottom: 1px solid var(--sl-color-neutral-700);
+}
+
+
+image-component,
+image-component img,
+image-component > * {
+  max-width: 60% !important;
+  height: auto !important;
+  width: auto !important;
+  display: block;
+  margin: 0 auto;
 }
