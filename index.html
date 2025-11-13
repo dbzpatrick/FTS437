@@ -80,10 +80,7 @@
     <sl-divider></sl-divider>
 
     <div>
-      <h2> Overview </h2>
-      <p>
-        This is an Interim Report
-      </p>
+      
       <p>
         Word Count: 2912
       </p>
@@ -382,7 +379,8 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\Functional block diagram of the nonlinear optimization methodology.jpg"
-            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology"></image-component>
+            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology"
+            style="max-width: 70% !important; height: auto; display: block; margin: 0 auto;"></image-component>
           <p>
             Therefore, to obtain accurate vehicle dynamics simulation results using CasADi, all input parameters must be correctly defined at each 
             iteration. In this case, the objective function consists of a comprehensive set of vehicle dynamics equations that describe the behaviour 
@@ -391,7 +389,8 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\Flow chart of vehicle performance evaluation.jpg"
-            subtitle="Figure 10: Flow chart of vehicle performance evaluation"></image-component>
+            subtitle="Figure 10: Flow chart of vehicle performance evaluation"
+            style="max-width: 70% !important; height: auto; display: block; margin: 0 auto;"></image-component>
         </div>
       </div>
 <!-- section 5 -->
@@ -499,7 +498,8 @@
            </p>
            <br />
               <image-component tag="image" source="assets\images\Track Model and Boundary Speed Profile.jpg"
-            subtitle="Figure 17: Track Model and Boundary Speed Profile"></image-component>
+            subtitle="Figure 17: Track Model and Boundary Speed Profile"
+            style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;"></image-component>
            <p>
             Then, the objective shifts to determining the vehicle’s maximum possible acceleration at each point, to predict the highest attainable speed 
             at the next position after acceleration. Given the speed and turn radius from the BSP, since both speed and lateral acceleration are known, 
@@ -523,6 +523,10 @@
             maximum possible acceleration at each instance using the Performance Envelope for acceleration, 
             and the second loop calculates the braking. As a result, the complete Speed Profile is obtained.
            </p>
+           <br />
+              <image-component tag="image" source="assets\images\Limit Speed Profile.jpg"
+            subtitle="Figure 20: Limit Speed Profile"
+            style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;"></image-component>
         </div>
 <!-- section 6 -->
     <br />
@@ -530,12 +534,22 @@
     <sl-divider></sl-divider>
       <div id="sub-section-6">
         <h2>6. Testing</h2>
+        <br />
+              <image-component tag="image" source="assets\images\Simulation Results Comparison.jpg"
+            subtitle="Figure 21: Simulation Results Comparison"
+            style="max-width: 80% !important; height: auto; display: block; margin: 0 auto;"></image-component>
         <p>
           The simulation results were tested and validated by comparing them against telemetry data from the NUS FSAE vehicle of the previous season, 
           R25E, recorded during the Endurance event at the 2025 FSAE Electric Competition. The lap time simulation using the newly developed LTS26 model 
           was conducted under identical conditions to 
           those of R25E, as well as the earlier LTS25 model, to ensure a fair and consistent comparison.
         </p>
+        <br />
+              <image-component tag="image" source="assets\images\Speed Profile Validation.jpg"
+            subtitle="Figure 22: Speed Profile Validation"
+              style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;">
+            </image-component>
+              
         <p>
           The simulation results showed that the predicted speed profile closely matched the telemetry data recorded during competition, both in overall 
           driving patterns and in maximum cornering speeds. The simulated results also reproduced similar acceleration and braking locations on the track 
@@ -592,6 +606,10 @@
         </div>
         <div id="sub-section-7-3">
           <h3> 7.3 Future Work Timeline</h3>
+          <image-component tag="image" source="assets\images\Timeline of Future Work.jpg"
+            subtitle="Figure 23: Timeline of Future Work"
+              style="max-width: 90% !important; height: auto; display: block; margin: 0 auto;">
+            </image-component>
         </div>
       </div>
     </div>
