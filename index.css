@@ -79,3 +79,55 @@ image-component > * {
   display: block;
   margin: 0 auto;
 }
+
+.table-of-content {
+  position: fixed;
+  top: 80px;
+  left: 40px;
+  width: 300px;
+  max-height: calc(90vh - 80px);
+  overflow-y: auto;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.table-of-content.hidden {
+  display: none;
+}
+
+.toc-toggle {
+  position: fixed;
+  top: 20px;
+  left: 40px;
+  z-index: 101;
+  transition: none;
+}
+/* Dark mode */
+body.dark-mode .table-of-content {
+  background-color: #2d2d2d;
+  border: 1px solid #404040;
+}
+
+/* Table of Contents text size */
+.table-of-content {
+  font-size: 0.9rem; /* Adjust this value */
+}
+
+.table-of-content h2 {
+  font-size: 1.2rem; /* Title size */
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.table-of-content sl-tree-item {
+  font-size: 0.85rem; /* Tree items size */
+}
+
+.table-of-content a {
+  font-size: 0.85rem; /* Link size */
+}
+

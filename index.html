@@ -36,6 +36,20 @@
   <link id="theme-dark" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css" disabled />
 </head>
 
+<script>
+  // Wait for DOM to load
+  document.addEventListener('DOMContentLoaded', function() {
+    const tocToggle = document.querySelector('.toc-toggle');
+    const toc = document.getElementById('toc-sidebar');
+    
+    if (tocToggle && toc) {
+      tocToggle.addEventListener('click', function() {
+        toc.classList.toggle('hidden');
+      });
+    }
+  });
+</script>
+
 <body>
   <div class="content">
     <nav class="top-nav">
@@ -45,7 +59,7 @@
       </sl-button>
       <sl-button variant="text" size="medium" href="https://github.com/nusfsae/NUS_LTS" target="_blank">
         <sl-icon slot="prefix" name="github"></sl-icon>
-        GitHub
+        LTS GitHub
       </sl-button>
       <sl-button variant="text" size="medium" href="https://linkedin.com/in/baizhou-patrick-dai" target="_blank">
         <sl-icon slot="prefix" name="linkedin"></sl-icon>
@@ -85,10 +99,14 @@
         Word Count: 2912
       </p>
     </div>
-    <sl-divider></sl-divider>
+   
+    <!-- Toggle button -->
+    <sl-button class="toc-toggle" variant="primary" size="medium" circle>
+      <sl-icon name="list"></sl-icon>
+    </sl-button>
 
-    <!-- This is the table-of-content component use to define all of the link directly to each section -->
-    <div class="table-of-content">
+<!-- Table of Contents -->
+    <div class="table-of-content" id="toc-sidebar">
       <h2>Table of Contents</h2>
       <sl-tree>
         <sl-tree-item expanded>
@@ -156,7 +174,7 @@
         </sl-tree-item>
 
         <sl-tree-item>
-          <a href="#references">A. References</a>
+          <a href="#references"> References</a>
         </sl-tree-item>
       </sl-tree>
     </div>
@@ -303,7 +321,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\Racing Tires Friction Circle.jpg"
-            subtitle="Figure 4: Racing Tires Friction Circle"></image-component>
+            subtitle="Figure 4: Racing Tires Friction Circle (Marashian, 2018)"></image-component>
             
             </h4>
           </div>
@@ -319,7 +337,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G Diagram.jpg"
-            subtitle="Figure 5: G-G Diagram"></image-component>
+            subtitle="Figure 5: G-G Diagram (Mclver, 1996)"></image-component>
 
           </div>
           <div id="sub-section-4-2-3">
@@ -333,14 +351,14 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram at different speeds"></image-component>
+            subtitle="Figure 6: G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
             <p>
               By combining the G-G Diagram at all speeds that a vehicle could possibly run at, it is possible to obtain a full three-dimensional graph 
               that covers the vehicle’s dynamic limit in all conditions, the G-G-V Diagram. 
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G-V Diagram.jpg"
-            subtitle="Figure 7: G-G-V Diagram"></image-component>
+            subtitle="Figure 7: G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
             <p>
               Ideally, the vehicle should operate along the boundary of this diagram, and any point within it indicates that the driver is not extracting 
               the car’s full potential. Therefore, the objective of the simulation is to accurately determine the 
@@ -371,7 +389,7 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\Visualization of non-linear optimization.jpg"
-            subtitle="Figure 8: Visualization of non-linear optimization"></image-component>
+            subtitle="Figure 8: Visualization of non-linear optimization (Britannica, 2025)"></image-component>
           <p>
             To perform nonlinear optimization using a solver such as IPOPT, the problem must first be formulated by defining the decision variables, 
             objective function, constraints, initial guesses, and numerical bounds. CasADi then symbolically constructs the optimization problem and 
@@ -379,7 +397,7 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\Functional block diagram of the nonlinear optimization methodology.jpg"
-            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology"
+            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"
             style="max-width: 70% !important; height: auto; display: block; margin: 0 auto;"></image-component>
           <p>
             Therefore, to obtain accurate vehicle dynamics simulation results using CasADi, all input parameters must be correctly defined at each 
@@ -620,17 +638,34 @@
       <h2>References</h2>
       <ul>
         <li>
-          Brody, J. E. (2007, December 11). Mental reserves keep brain agile. The New York Times. Retrieved from
-          http://www.dowjones.com/factiva/
+          Andrei-Cristian Pridie, Csaba Antonya. (14 June, 2021). 
+          The Theoretical Study of an Interconnected Suspension System for a Formula Student Car. Applied Sciences.
         </li>
         <li>
-          Chamberlin, J., Novotney, A., Packard, E., & Price, M. (2008, May). Enhancing worker well-being: Occupational
-          health psychologists convene to share their research on work, stress, and health. Monitor on Psychology,
-          39(5), 26-29.
+          Britannica, E. (13 11, 2025). Retrieved from Encyclopædia Britannica: 
+          https://www.britannica.com/science/optimization/Nonlinear-programming#/media/1/430575/2673
         </li>
         <li>
-          Jones, T. J., & Fields, N. (2003). Emotional quotient and personality. E-Journal of Applied Psychology, 2(2),
-          38-45. Retrieved from http://ejournalappliedpsyc/index.php/ejap
+          Christoph Allig, Gerd Wanielik. (2019). 
+          Extending the vehicular network simulator Artery in order to generate synthetic data for collective perception.
+        </li>
+        <li>
+          Fouzia Ferdous, ABM Harun-ur Rashid. (2024). 
+          Optimization for Spectral and Power Characteristics of Bicolour LED Driver.
+        </li>
+        <li>
+          Joel A E Andersson, Joris Gillis, Greg Horn, James B Rawlings, Moritz Diehl. (2019). CasADi: 
+          A software framework for nonlinear optimization and optimial control. Mathematical Programming Computation, 1-36.
+        </li>
+        <li>
+          Marashian, A. (5 October, 2018). What is 'Circle of Friction' ? 
+          Retrieved from ResearchGate: https://www.researchgate.net/post/What-is-Circle-of-Friction
+        </li>
+        <li>
+          Mclver, J. (November, 1996). The GG Diagram. Retrieved from HP Wizard: https://hpwizard.com/gg-diagram.html
+        </li>
+        <li>
+          Patrucco, A. (2025). Lap Time Simulation: steps 5,6 and 7, and some divagation.
         </li>
       </ul>
     </div>
