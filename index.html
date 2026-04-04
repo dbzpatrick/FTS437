@@ -729,152 +729,229 @@
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
             subtitle="Figure 6: Simulation of common vehicle parameters"></image-component>
               
-            
+        </div>
+          <div id="sub-section-5-3-3"> </div>
+            <h4>5.3.3 Subsystem Simulation implementation</h4>
+            <div id="sub-section-5-3-3-1"> </div>
+              <h5>5.3.3.1 Aerodynamics</h5>
+              <p>
+                Aerodynamic properties are provided by the Aerodynamics department based on Computational Fluid Dynamics (CFD) simulations conducted using a third-party solver. 
+                Simulations are performed across a range of flow directions and vehicle geometries to account for both straight-line and cornering operating conditions, such that 
+                the aerodynamic coefficients vary accordingly between these regimes. While it is desirable to further differentiate the aerodynamic properties as a function of cornering radius,
+                 any such differentiation must be implemented in a manner that preserves the linearity and differentiability of the optimisation objective function. 
+                To satisfy this requirement, a sigmoid function is employed in place of conventional if-else conditional logic.
+              </p>
+              \[
+                \sigma = \frac{1}{1 + e^{-k\left(\sqrt{\delta_{in}^2 + \varepsilon} - \frac{2\pi}{180}\right)}} \tag{5.22}
+              \]
 
+              \[
+                CL = CL_s(1 - \sigma) + CL_c \cdot \sigma \tag{5.23}
+              \]
 
+              \[
+                CD = CD_s(1 - \sigma) + CD_c \cdot \sigma \tag{5.24}
+              \]
 
+              \[
+                ab = ab_s(1 - \sigma) + ab_c \cdot \sigma \tag{5.25}
+              \]
+
+            <div id="sub-section-5-3-3-2"> </div>
+              <h5>5.3.3.2 Steering System</h5>
+              <p>
+                Ackermann steering geometry is widely adopted to differentiate the steering angles of the inner and outer front wheels during cornering, 
+                thereby improving directional stability and reducing tyre scrub. 
+                The simulation of Ackermann geometry effects on vehicle dynamic performance is therefore necessary for accurate modelling. 
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Ackermann Geometry Comparison"></image-component>
+              <p>
+                The Ackermann geometry is characterised using Optimum Kinematic software, which generates the relationship between the left and right steering angles and the percentage 
+                of maximum steering input as a function of the expected cornering radius. Polynomial curve fitting is subsequently applied to this data to establish a continuous 
+                functional relationship between the inner and outer wheel steering angles and the instantaneous cornering radius. 
+                Incorporating this relationship into the slip angle formulation modifies the front axle slip angle expressions as follows:
+              </p>
+              \[
+                \alpha_{FR} = -\delta_{\text{Inner}} + \arctan\!\left(\frac{V_y + \omega_r \cdot a}{V_x + \omega_r \cdot d/2}\right) \tag{5.26}
+              \]
+
+              \[
+                \alpha_{FL} = -\delta_{\text{Outer}} + \arctan\!\left(\frac{V_y + \omega_r \cdot a}{V_x - \omega_r \cdot d/2}\right) \tag{5.27}
+              \]
+
+              \[
+                \alpha_{RR} = \arctan\!\left(\frac{V_y - \omega_r \cdot a}{V_x + \omega_r \cdot d/2}\right) \tag{5.28}
+              \]
+
+              \[
+                \alpha_{RL} = \arctan\!\left(\frac{V_y - \omega_r \cdot a}{V_x - \omega_r \cdot d/2}\right) \tag{5.29}
+              \]
+              <p>
+                This now enables the comparison between different Ackermann geometry as shown below.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram Comparison with Ackermann"></image-component>
+              <p>
+                Simulation results comparing the vehicle performance with and without the Ackermann steering correction were evaluated. Upon overlaying the two outputs, 
+                the resulting G-G diagrams were found to be almost entirely coincident, with differences manifesting only at the level of decimal precision. 
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram without Ackermann Simulation"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram with Ackermann Simulation"></image-component>
+              <p>
+                It was further observed that the introduction of the Ackermann steering feature introduces additional numerical 
+                complexity into the optimisation problem, arising from the higher-order polynomial curve fitting function used to represent the steering geometry. 
+              </p><p>
+                Given that the performance benefit of the Ackermann steering feature is marginal while its adverse effect on numerical stability is significant, 
+                it was decided that this feature would be retained exclusively for steady-state G-G diagram simulation and deliberately excluded from the quasi-steady-state lap simulation.
+              </p>
+
+            <div id="sub-section-5-3-3-3"> </div>
+              <h5>5.3.3.2 Brake System</h5>
+              <p>
+                During braking, longitudinal load transfer shifts the normal load distribution towards the front axle. To fully exploit the available tyre grip under these conditions, 
+                it is advantageous to distribute the braking force asymmetrically between the front and rear axles, commonly referred to as brake bias. Determining the optimal brake 
+                bias for the NUS FSAE vehicle under its specific
+                 operating conditions is therefore of direct engineering interest, and a dedicated simulation capability was developed to address this requirement.
+              </p><p>
+                The brake bias constraint is implemented by imposing an additional equality constraint within the numerical optimisation framework, 
+                requiring that the ratio of front to total braking force is equal to the prescribed brake bias value during braking.
+              </p>
+              \[
+                \text{Brake Bias} = \frac{F_{xfl}}{F_{xfl} + F_{xrl}} \tag{5.30}
+              \]
+              <p>
+                By adding this constraint, it is observed from the G-G diagram comparison that the introduction of a fixed brake bias reduces the peak longitudinal deceleration 
+                relative to the unbiased baseline. As lateral acceleration increases, aerodynamic and inertial load transfer shifts the tyre normal forces away from the balance point 
+                assumed by the fixed bias, causing one axle to saturate before the other reaches its grip limit. The combined braking capacity is therefore 
+                lower than the theoretical maximum achievable when both axles are allowed to operate simultaneously at their respective traction limits. 
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram Comparison with Brake Bias"></image-component>
+              <p>
+                More critically, the fixed brake bias introduces a discrete regime switch into the simulation model, causing the objective landscape presented to the optimiser to contain a 
+                discontinuity at which the gradient of the braking force with respect to the decision variables is undefined. This manifests visibly in the G-G diagram as the inward concavity
+                 observed in the high-lateral-acceleration region of the constrained curve, where the optimiser loses the ability to track the outer 
+                performance envelope smoothly. The underlying cause of this instability and its impact on the fidelity of the simulation results remains an open issue.
+              </p><p>
+                Consequently, the brake bias constraint is deliberately excluded from the quasi-steady-state (QSS) lap
+                 simulation in order to preserve its numerical stability and the physical continuity of the resulting speed and force profiles. 
+              </p>
       </div>
 <!-- section 5 -->
     <br />
     <br />
     <sl-divider></sl-divider>
-      <div id="sub-section-5"></div>
-        <h2>5.Prototyping</h2>
-        <div id="sub-section-5-1"></div>
-          <h3>5.1 Steady-State Simulation</h3>
+      <div id="sub-section-6"></div>
+        <h2>6 Testing and Tuning</h2>
+        <div id="sub-section-6-1"></div>
+          <h3>6.1 Straight Line Simulation Validation</h3>
           <p>
-            As discussed earlier, the first step in the simulation process is to find out the dynamic limit, in both longitudinal and lateral, 
-            of the vehicle under a steady-state condition. In other words, to find out the G–G diagram of the vehicle at a specific speed.
-          </p>
-          <p>
-            The first design iteration of achieving this goal was to maximize the lateral acceleration (Ay) at each swept Ax values. To begin with, 
-            the maximum and minimum values of Ax must be found first by setting Ay to zero at both of their optimization framework. Initial guesses of 
-            the relevant decision variables are set according to straight-line conditions as well to provide a closer guess. The program then generates 
-            a mesh grid of Ax, and for each iterated Ax, optimize for the maximum value of Ay. This will output a set of Ax and Ay values, 
-            forming the G-G diagram as demanded.
+            The acceleration simulation was applied to a 75-metre straight-line track representative of the Formula SAE Acceleration event. The resulting speed and 
+            force profiles demonstrate behaviour consistent with the expected physical characteristics of the vehicle under full-throttle conditions. 
           </p>
           <br />
               <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
-            subtitle="Figure 11: First Prototype Visualization"></image-component>
+            subtitle="Figure 11: Simulated Speed and Longitudinal G in Acceleration Event"></image-component>
           <p>
-            However, this design has notable limitations. It requires at least three separate nonlinear optimization setups within the program, 
-            making maintenance and updates cumbersome. Furthermore, testing revealed that the 
-            initial query points for Ay often experienced a high rate of optimization failure due to tight constraints.
+            The sensitivity of the simulation to vehicle setup parameters was further examined by varying the Final Drive Ratio (FDR). The results confirm that the simulation responds 
+            appropriately to changes in 
+            this parameter, producing distinct speed profiles that reflect the trade-off between peak torque delivery and top speed associated with different gear ratios. 
           </p>
+          <br />
+              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+            subtitle="Figure 11: Comparison of FDR in Acceleration Event"></image-component>
+          <br />
+              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+            subtitle="Figure 11: Speed Difference over Distance for different FDR"></image-component>
           <p>
-            To tackle the issue and optimize the design, a second design was proposed. The optimization problem no longer seeks for optimizing either 
-            decision variable Ax or Ay, but a grip factor P by│P│=√(〖Ax〗^2+〖Ay〗^2 ), which measures the total acceleration of the vehicle. As the aim 
-            is to find the combination of maximum longitudinal and lateral acceleration, the problem was essentially converted to maximize the value of P. 
+            To validate the accuracy of the model, the simulated speed profile was compared against telemetry data recorded during the Formula SAE Michigan 2025 Acceleration event. 
+            Although the recorded telemetry 
+            exhibits localised fluctuations attributable to sensor noise, the overall trend and critical performance features are in close agreement with the simulation output.
+          </p>
+          <br />
+              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+            subtitle="Figure 11: Comparison of Simulated Speed and Vehicle Data"></image-component>
+          <p>
+            Comparison of the simulated and measured speed profiles reveals a localised discrepancy concentrated in the early phase of acceleration. As shown in the speed error plot, 
+            the divergence is not sustained throughout the run but is instead confined to the initial distance window. This behaviour is attributed to wheel spin observed in the physical
+             vehicle during launch. The simulation assumes ideal 
+            tyre–road contact with no slip beyond the tyre model's steady-state limits, and therefore does not replicate the transient speed loss associated with a wheelspin event.
           </p>
           <br />
               <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
-            subtitle="Figure 12: Second Prototype Visualization"></image-component>
-          <p>
-            The program first defines an angle variable, θ (Theta), and generates a mesh grid ranging from π to –π. Using this, a constraint is applied 
-            such that Ax/Ay = tan(θ) at each point of interest, ensuring that the iterations are evenly distributed across all directions of acceleration. 
-            For each iteration, 
-            the decision variable P is then maximized, and a corresponding set of optimized (Ax, Ay) values is obtained as the output. 
-          </p>
-        <div id="sub-section-5-2"></div>
-         <h3>5.2 Quasi-Steady-State Simulation</h3>
-          <p>
-            By repeating this process for each vehicle speed, a Quasi-steady-state simulation can be completed, meaning the process of performing of 
-            Steady-state simulation at multiple different states. 
-            This will construct a full G–G–V diagram by combining the G-G diagram obtained at different speeds. 
-          </p>
-          <br />
-              <image-component tag="image" source="assets\images\Simulated G-G Diagram at different speeds.jpg"
-            subtitle="Figure 13: Simulated G-G Diagram at different speeds"></image-component>
-          <p>
-            The G-G diagram calculations were performed at speeds ranging from 10 meters per second up to the vehicle’s maximum theoretical speed, 
-            with a constant increment of 1 meter per second. Speeds below 10 meters per second were excluded, as the vehicle is unlikely to operate 
-            in that range during dynamic events, and its behaviour at such low speeds differs significantly, often causing the optimization solver to 
-            fail. Instead, extrapolation 
-            was applied to extend the G-G-V diagram and estimate the vehicle’s performance below 10 meters per second.
-          </p>
-          <br />
-              <image-component tag="image" source="assets\images\Interpolation of G-G-V Diagram.jpg"
-            subtitle="Figure 14: Interpolation of G-G-V Diagram"></image-component>
-        <div id="sub-section-5-3">
-          <h3>5.3 Optimization Success Rate</h3>
-           <p>
-            At each point of interest, numerical optimization is performed to determine the optimal set of decision variables. Since a general 
-            configuration of numerical constraints and initial guesses is applied uniformly across all instances, certain optimizations may fail 
-            due to infeasibility or nonlinearity. To prevent these failures from interrupting the overall simulation process, a try–catch structure 
-            is implemented, allowing the program to skip any failed instances automatically. At the end of the simulation, a success rate is computed 
-            as the ratio of successful optimizations 
-            to the total number of optimization attempts, providing a metric to access the credibility of per simulation.
-           </p>
-           <br />
-              <image-component tag="image" source="assets\images\Flow chart of optimization in loop.jpg"
-            subtitle="Figure 15: Flow chart of optimization in loop"></image-component>
-           <p>
-            To increase the success rate, several additional design choices were implemented. For example, at each optimization query point, the 
-            initial guesses for the decision variables are set to the optimized values obtained from the previous query point. This ensures, first, 
-            that the optimization problem remains feasible because the initial values come from the program rather than arbitrary human guesses, and 
-            second, that the initial guesses are close to the true solutions since consecutive query points are adjacent to each other. 
-            Other examples include changing numerical constraints for certain decision variables at higher speed regime.
-           </p>
-        </div>
-        <div id="sub-section-5-4">
-          <h3>5.4 Speed Profile</h3>
-           <p>
-            With the vehicle’s performance limits established, it becomes possible to predict its dynamic capabilities on an actual competition 
-            track, such as during the Endurance event. To achieve this, a Boundary Speed Profile (BSP) is first generated, representing the vehicle’s 
-            maximum achievable cornering speed along the track, following by calculating 
-            the maximum speed with limited acceleration and braking, which outputs the Limit Speed Profile (LSP).
-           </p>
-           <p>
-            Using the interpolated G-G-V diagram obtained earlier, the program determines the maximum possible lateral acceleration, Ay, for each 
-            speed value, which represents the vehicle’s peak cornering capability at that speed. The program then computes the minimum achievable turn 
-            radius for each speed–acceleration combination. 
-            The discrete results are then interpolated to generalize the data across all possible cornering scenarios.
-           </p>
-           <br />
-              <image-component tag="image" source="assets\images\Cornering Speed against Radius.jpg"
-            subtitle="Figure 16: Cornering Speed against Radius"></image-component>
-           <p>
-            The program maps the cornering speed to the corresponding turn radius if the specific segment has a turn radius less than 50 meters, else, 
-            put the maximum vehicle speed. As such, the BSP was obtained.
-           </p>
-           <br />
-              <image-component tag="image" source="assets\images\Track Model and Boundary Speed Profile.jpg"
-            subtitle="Figure 17: Track Model and Boundary Speed Profile"
-            style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;"></image-component>
-           <p>
-            Then, the objective shifts to determining the vehicle’s maximum possible acceleration at each point, to predict the highest attainable speed 
-            at the next position after acceleration. Given the speed and turn radius from the BSP, since both speed and lateral acceleration are known, 
-            the corresponding longitudinal acceleration, Ax, can be obtained from the G-G-V diagram.
-           </p>
-           <p>
-            However, since the G-G-V diagram represents both acceleration and braking conditions, a given combination of speed and lateral acceleration 
-            yields two possible Ax values — one positive (acceleration) and one negative (braking). Therefore, the G-G-V diagram must be divided into two 
-            separate regions, 
-            allowing the program to independently extract acceleration and braking data.
-           </p>
-           <br />
-              <image-component tag="image" source="assets\images\Performance Envelope for Acceleration.jpg"
-            subtitle="Figure 18: Performance Envelope for Acceleration"></image-component>
-           
-            <br />
-              <image-component tag="image" source="assets\images\Performance Envelope for Braking.jpg"
-            subtitle="Figure 19: Performance Envelope for Braking"></image-component>
+            subtitle="Figure 12: Speed Prediction Error over Distance"></image-component>
+
+        <div id="sub-section-6-2"></div>
+          <h3>6.2 Corner Simulation Validation</h3>
+          <div id="sub-section-6-2-1"></div>
+            <h4>6.2.1 Numerical Optimization Tuning</h4>
             <p>
-            Two separate for-loops were implemented to update the speed values derived from the Boundary Speed Profile. The first loop evaluates the 
-            maximum possible acceleration at each instance using the Performance Envelope for acceleration, 
-            and the second loop calculates the braking. As a result, the complete Speed Profile is obtained.
-           </p>
-           <br />
-              <image-component tag="image" source="assets\images\Limit Speed Profile.jpg"
-            subtitle="Figure 20: Limit Speed Profile"
-            style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;"></image-component>
-        </div>
+              At each point of interest within the simulation, a separate numerical optimisation is performed to determine the optimal set of decision variables. Since a 
+              generalised configuration of numerical constraints and initial guesses is applied uniformly across all instances, certain optimisation problems may fail to 
+              converge due to local infeasibility or the highly nonlinear nature of the objective landscape in certain regions of the operating domain. To prevent isolated
+               failures from interrupting the overall simulation process, the programme skip any failed instances automatically and continue execution. Upon completion of 
+               the simulation, an optimisation success rate is computed as the ratio of successfully converged instances to the 
+              total number of optimisation attempts, providing a quantitative metric for assessing the overall credibility and reliability of each simulation run.
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+            subtitle="Figure 12: Flow chart of optimization in loop"></image-component>
+            <p>
+              Several additional design measures were implemented to improve the optimisation success rate. At each query point, the initial guesses for the decision variables are 
+              set to the optimised values obtained from the immediately preceding query point, rather than from fixed arbitrary values. Additional measures include the adaptive modification
+               of numerical constraint bounds 
+              for certain decision variables within higher speed regimes, where the physical operating conditions deviate significantly from those at lower speeds.
+            </p>
+
+          <div id="sub-section-6-2-2"></div>
+            <h4>6.2.2 Autocross and Endurance Simulation Validation</h4>
+            <br />
+              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+            subtitle="Figure 12: Simulation Results Comparison"></image-component>
+            <p>
+              The simulation results were validated by comparison against telemetry data recorded from the NUS FSAE vehicle of the preceding season, designated R25E, 
+              during the Endurance event at the 2025 Formula SAE Electric Competition. To ensure a fair and consistent comparison, the LTS26 simulation 
+              was conducted under conditions identical to those of R25E, and the results were additionally compared against the outputs of the preceding LTS25 model.
+            </p>
+            <br />
+              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+            subtitle="Figure 12: Speed Profile Validation"></image-component>
+            <p>
+              The simulated speed profile was found to be in close agreement 
+              with the competition telemetry data, both in terms of the overall driving pattern and the peak cornering speeds achieved along the track. 
+            </p><p>
+              Discrepancies between the simulated and recorded speed profiles were observed primarily in the high-speed regions of the run, where the vehicle experienced significant
+               powertrain thermal management constraints resulting in substantial losses in energy transmission efficiency. As the current simulation models the powertrain based on
+                its theoretical torque-speed characteristics without accounting for thermal dissipation effects, 
+              it is unable to replicate the performance degradation that occurs under sustained high-load operating conditions in competition. 
+            </p><p>
+              Furthermore, the simulation was unable to fully replicate the dynamic behaviour of a human driver on track sections such as slaloms, where the turn 
+              radius varies rapidly over short distances. This discrepancy reflects an inherent limitation of the quasi-steady-state modelling approach itself, which 
+              assumes the vehicle is in equilibrium at each instant and is therefore unable to capture the transient dynamics. Resolving this limitation will ultimately require a 
+              transition to a fully transient dynamic simulation framework, which is identified as a long-term development objective in Section 7.
+            </p><p>
+              Despite these limitations, LTS26 demonstrated a substantial improvement in computational efficiency relative to its predecessor. As a four-wheel quasi-steady-state model, 
+              LTS26 required approximately half the computation time of LTS25, which operated on a simpler two-wheel bicycle model. This improvement not only satisfies the computational 
+              efficiency objective established at the outset of the development programme, but also demonstrates that the more complex four-wheel model can be evaluated more efficiently 
+              through the decoupled Performance Envelope architecture introduced in this work. 
+              This result further highlights the potential for continued expansion of the vehicle model towards greater fidelity and complexity in future development cycles.
+            </p>
+
+
 <!-- section 6 -->
     <br />
     <br />
     <sl-divider></sl-divider>
-      <div id="sub-section-6">
-        <h2>6. Testing</h2>
+      <div id="sub-section-7">
+        <h2>7 Future Work</h2>
         <br />
               <image-component tag="image" source="assets\images\Simulation Results Comparison.jpg"
             subtitle="Figure 21: Simulation Results Comparison"
