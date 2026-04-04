@@ -107,79 +107,120 @@
     </sl-button>
 
 <!-- Table of Contents -->
-    <div class="table-of-content" id="toc-sidebar">
-      <h2>Table of Contents</h2>
-      <sl-tree>
-        <sl-tree-item expanded>
-          <a href="#section-header-1">1. Introduction</a>
-          <sl-tree-item>
-            <a href="#sub-section-1-1">1.1 Introduction to NUS Formula SAE</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-1-2">1.2 Introduction to Lap Time Simulation</a>
-          </sl-tree-item>
-        </sl-tree-item>
+<div class="table-of-content" id="toc-sidebar">
+  <h2>Table of Contents</h2>
+  <sl-tree>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-2">2. Problem Definition</a>
-        </sl-tree-item>
+    <sl-tree-item expanded>
+      <a href="#section-header-1">1 Introduction</a>
+      <sl-tree-item>
+        <a href="#sub-section-1-1">1.1 NUS Formula SAE</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#sub-section-1-2">1.2 Lap Time Simulation</a>
+      </sl-tree-item>
+    </sl-tree-item>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-3">3. Design Statement</a>
-        </sl-tree-item>
+    <sl-tree-item expanded>
+      <a href="#section-header-2">2 Problem Definition</a>
+    </sl-tree-item>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-4">4. Detail Design</a>
-          <sl-tree-item>
-            <a href="#sub-section-4-1">4.1 Revamped Structure</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-4-2">4.2 What should a Performance Envelope be like</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-4-3">4.3 How to obtain the Performance Envelope</a>
-          </sl-tree-item>
-        </sl-tree-item>
+    <sl-tree-item expanded>
+      <a href="#section-header-3">3 Design Statement</a>
+    </sl-tree-item>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-5">5. Prototyping</a>
-          <sl-tree-item>
-            <a href="#sub-section-5-1">5.1. Steady-State Simulation</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-5-2">5.2 Quasi-Steady-State Simulation</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-5-3">5.3 Optimization Success Rate</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-5-4">5.4 Speed Profile</a>
-          </sl-tree-item>
-        </sl-tree-item>
+    <sl-tree-item expanded>
+      <a href="#section-header-4">4 Methodology</a>
+      <sl-tree-item>
+        <a href="#sub-section-4-1">4.1 G-G-V Diagram</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#sub-section-4-2">4.2 Numerical Optimization</a>
+      </sl-tree-item>
+    </sl-tree-item>
 
-        <sl-tree-item expanded>
-          <a href="#section-header-6">6. Testing</a>
-        </sl-tree-item>
-
-        <sl-tree-item expanded>
-          <a href="#section-header-5">7. Future Work</a>
-          <sl-tree-item>
-            <a href="#sub-section-7-1">7.1 Optimization Success Rate</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-7-2">7.2 Model Complexity and Insights</a>
-          </sl-tree-item>
-          <sl-tree-item>
-            <a href="#sub-section-7-3">7.3 Future Work Timeline</a>
-          </sl-tree-item>
-        </sl-tree-item>
-
+    <sl-tree-item expanded>
+      <a href="#section-header-5">5 Design and Prototyping</a>
+      <sl-tree-item expanded>
+        <a href="#sub-section-5-1">5.1 Design Overview</a>
         <sl-tree-item>
-          <a href="#references"> References</a>
+          <a href="#sub-section-5-1-1">5.1.1 Simulation Structure Overview</a>
         </sl-tree-item>
-      </sl-tree>
-    </div>
-    <sl-divider></sl-divider>
+        <sl-tree-item>
+          <a href="#sub-section-5-1-2">5.1.2 Revamped Structure</a>
+        </sl-tree-item>
+        <sl-tree-item>
+          <a href="#sub-section-5-1-3">5.1.3 Course Differentiation</a>
+        </sl-tree-item>
+      </sl-tree-item>
+      <sl-tree-item expanded>
+        <a href="#sub-section-5-2">5.2 Transient Model Simulation</a>
+        <sl-tree-item>
+          <a href="#sub-section-5-2-1">5.2.1 Acceleration Simulation</a>
+        </sl-tree-item>
+        <sl-tree-item>
+          <a href="#sub-section-5-2-2">5.2.2 Braking Simulation</a>
+        </sl-tree-item>
+      </sl-tree-item>
+      <sl-tree-item expanded>
+        <a href="#sub-section-5-3">5.3 Quasi-Steady-State Simulation</a>
+        <sl-tree-item>
+          <a href="#sub-section-5-3-1">5.3.1 Vehicle Model</a>
+        </sl-tree-item>
+        <sl-tree-item>
+          <a href="#sub-section-5-3-2">5.3.2 Dynamic Model</a>
+        </sl-tree-item>
+        <sl-tree-item>
+          <a href="#sub-section-5-3-3">5.3.3 Subsystem Simulation Implementation</a>
+        </sl-tree-item>
+      </sl-tree-item>
+    </sl-tree-item>
+
+    <sl-tree-item expanded>
+      <a href="#section-header-6">6 Testing and Tuning</a>
+      <sl-tree-item>
+        <a href="#sub-section-6-1">6.1 Straight Line Simulation Validation</a>
+      </sl-tree-item>
+      <sl-tree-item expanded>
+        <a href="#sub-section-6-2">6.2 Corner Simulation Validation</a>
+        <sl-tree-item>
+          <a href="#sub-section-6-2-1">6.2.1 Numerical Optimization Tuning</a>
+        </sl-tree-item>
+        <sl-tree-item>
+          <a href="#sub-section-6-2-2">6.2.2 Autocross and Endurance Simulation Validation</a>
+        </sl-tree-item>
+      </sl-tree-item>
+    </sl-tree-item>
+
+    <sl-tree-item expanded>
+      <a href="#section-header-7">7 Future Work</a>
+      <sl-tree-item>
+        <a href="#sub-section-7-1">7.1 Optimization Success Rate</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#sub-section-7-2">7.2 Model Complexity and Insights</a>
+      </sl-tree-item>
+    </sl-tree-item>
+
+    <sl-tree-item expanded>
+      <a href="#appendix">Appendix</a>
+      <sl-tree-item>
+        <a href="#appendix-a1">A.1 LTS26 Full Codes</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#appendix-a2">A.2 Optimization Solver Selection</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#appendix-a3">A.3 Purpose of Lap Time Simulation</a>
+      </sl-tree-item>
+    </sl-tree-item>
+
+    <sl-tree-item>
+      <a href="#references">References</a>
+    </sl-tree-item>
+
+  </sl-tree>
+</div>
 
 
     <div>
@@ -952,87 +993,48 @@
     <sl-divider></sl-divider>
       <div id="sub-section-7">
         <h2>7 Future Work</h2>
-        <br />
-              <image-component tag="image" source="assets\images\Simulation Results Comparison.jpg"
-            subtitle="Figure 21: Simulation Results Comparison"
-            style="max-width: 80% !important; height: auto; display: block; margin: 0 auto;"></image-component>
-        <p>
-          The simulation results were tested and validated by comparing them against telemetry data from the NUS FSAE vehicle of the previous season, 
-          R25E, recorded during the Endurance event at the 2025 FSAE Electric Competition. The lap time simulation using the newly developed LTS26 model 
-          was conducted under identical conditions to 
-          those of R25E, as well as the earlier LTS25 model, to ensure a fair and consistent comparison.
-        </p>
-        <br />
-              <image-component tag="image" source="assets\images\Speed Profile Validation.jpg"
-            subtitle="Figure 22: Speed Profile Validation"
-              style="max-width: 100% !important; height: auto; display: block; margin: 0 auto;">
-            </image-component>
+        <div id="sub-section-7-1"> </div>
+          <h3>7.1 Simulation Validation</h3>
+          <p>
+            Although a limited number of optimisation failures can be compensated for through interpolation with results from
+             neighbouring query points, an excessive failure rate introduces systematic distortions into the G-G-V diagram 
+             and prevents it from accurately representing the vehicle's true performance envelope. The fidelity of the 
+             downstream lap simulation is therefore directly contingent on the reliability of the optimisation at each 
+             operating point, and reducing the 
+            incidence of solver failures represents the most critical priority for the next stage of programme development.
+          </p>
+          <p>
+            Improving the optimisation success rate is not a one-time fix but an ongoing engineering effort that demands 
+            continuous tuning and systematic investigation. In the near term, the primary focus will be on the continued 
+            tuning of IPOPT's configurable, which influences convergence behaviour in ways that are highly problem-specific 
+            and must be determined empirically through iterative experimentation. In the longer term, the development of 
+            a purpose-built optimisation solver tailored to the vehicle dynamics problem formulation can be considered. 
+            Sustained and methodical effort across these directions will be essential to 
+            progressively reduce the failure rate and improve the overall reliability and accuracy of the simulation.
+          </p>
+
+        <div id="sub-section-7-2"> </div>
+          <h3>7.2 Model Complexity and Insights</h3>
+          <p>
+            The current iteration of LTS26 employs a four-wheel vehicle model with three degrees of freedom, encompassing 
+            longitudinal motion, lateral motion, and yaw rotation. Future development will focus on progressively expanding 
+            the model complexity following the standard hierarchy of vehicle dynamics formulations, from the current 
+            three-degree-of-freedom representation, incorporating independent wheel rotational dynamics with 7 DOFs, and 
+            ultimately towards a 
+            14-DOFs formulation that accounts for suspension kinematics, roll, pitch, and individual corner load variation. 
+          </p><p>
+            Beyond model fidelity, a longer-term objective is to transition the core simulation architecture from 
+            the current quasi-steady-state framework to a fully transient dynamic model. While the quasi-steady-state
+             approach provides a computationally efficient means of approximating vehicle performance, it inherently 
+             assumes that the vehicle is in equilibrium at each instant and cannot capture transient phenomena. A
+              transient model would enables a more physically complete simulation of the vehicle's behaviour 
+            throughout a competition lap and providing a stronger foundation for future development of the tool.
+          </p>
               
-        <p>
-          The simulation results showed that the predicted speed profile closely matched the telemetry data recorded during competition, both in overall 
-          driving patterns and in maximum cornering speeds. The simulated results also reproduced similar acceleration and braking locations on the track 
-          as those of the competition driver, 
-          although the actual driver generally braked earlier due to risk management and individual driving style.
-        </p>
-        <p>
-          However, discrepancies between the simulated and recorded speed profiles were observed primarily during acceleration phases and on track segments 
-          with complex geometry. The program tended to overestimate R25E’s acceleration performance, as it was based on theoretical motor characteristics. 
-          In reality, the powertrain system experienced significant 
-          performance degradation due to thermal limitations and reduced efficiency during competition. 
-        </p>
-        <p>
-          In addition, the simulation could not fully replicate the dynamic behaviour of a human driver in sections such as slaloms, 
-          where the turn radius changes rapidly over short distances. The simulation seeks to minimize total lap time by accelerating whenever possible, 
-          while a human driver prioritizes maintaining smooth and stable throttle control in these conditions.
-        </p>
-        <p>
-          Despite these limitations, LTS26 demonstrated a substantial improvement in computational efficiency. As a four-wheel quasi-steady-state model, 
-          it required only about half the computation time of LTS25, which operated on a simpler bicycle model. This improvement not only fulfils the 
-          development goals set at the beginning of the season but also highlights 
-          the potential for future expansion of the vehicle model toward greater complexity and accuracy.
-        </p>
 
-      </div>
-      <div id="sub-section-7">
-  <!-- section 7 -->
-    <br />
-    <br />
-    <sl-divider></sl-divider>
-        <h2>7. Future Work</h2>
-        <div id="sub-section-7-1">
-          <h3> 7.1 Optimization Success Rate</h3>
-          <p>
-            Although a few optimization failures can be compensated for through interpolation with neighbouring results, excessive failures lead to 
-            distortions in the G-G-V diagram and prevent it from accurately representing the vehicle’s true performance. Therefore, reducing the number 
-            of optimization failures is critical to improving the overall 
-            accuracy of the simulation. This will be the key focus in the next stage of program optimization and development.
-          </p>
 
-        </div>
-        <div id="sub-section-7-2">
-          <h3> 7.2 Model Complexity and Insights</h3>
-          <p>
-            The current version of the LTS26 Lap Simulation employs a four-wheel vehicle model but maintains only three degrees of freedom 
-            (longitudinal motion, lateral motion, and yaw). Moving forward, the model will be expanded to include seven degrees of freedom by 
-            incorporating the rotational speeds of all four individual wheels. Further development aims to extend the model to 
-            fourteen degrees of freedom, allowing the suspension system of each corner to be represented independently.
-          </p>
-          <p>
-            In addition, the simulation tool will be enhanced to provide more comprehensive insights into vehicle performance beyond speed and acceleration, 
-            including tire slip angles, optimal driver inputs, and aerodynamic maps, among others.
-          </p>
-        </div>
-        <div id="sub-section-7-3">
-          <h3> 7.3 Future Work Timeline</h3>
-          <image-component tag="image" source="assets\images\Timeline of Future Work.jpg"
-            subtitle="Figure 23: Timeline of Future Work"
-              style="max-width: 90% !important; height: auto; display: block; margin: 0 auto;">
-            </image-component>
-        </div>
-      </div>
-    </div>
 
-    <!-- This is an example of how you can use the references component to create references -->
+    <!-- references -->
     <div id="references" class="references">
       <sl-divider></sl-divider>
       <h2>References</h2>
