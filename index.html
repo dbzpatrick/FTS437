@@ -22,6 +22,7 @@
   <script type="module" src="./components/image/image-component.js"></script>
 
   <script type="module" src="./components/video/video.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <link rel="stylesheet" href="./components/references/references.css">
 
@@ -185,7 +186,7 @@
 
       <!-- section 1 -->
       <div id="section-header-1">
-        <h2> 1. Introduction </h2>
+        <h2> 1 Introduction </h2>
       </div>
 
       <div id="sub-section-1-1">
@@ -205,16 +206,16 @@
       <div id="sub-section-1-2">
         <h3>1.2 Introduction to Lap Time Simulation</h3>
         <p>
-          Lap Time Simulation (LTS) is a computational tool used to predict a vehicle’s maximum on-track
-          performance based on its design parameters, enabling teams to make data-driven design decisions.
-          Previous members of the NUS FSAE Team had attempted to develop similar tools in past years, though
-          none were built in a systematic or scalable manner. The most recent version of the self-developed LTS
-          tool was authored by me, beginning in May 2024, and is based on a two-wheel (bicycle) vehicle model. 
+          Lap Time Simulation (LTS) is a computational modelling tool used to predict a vehicle’s maximum on-track performance based on its design parameters,
+           enabling teams to make data-driven design decisions. Previous members of the NUS FSAE Team had attempted to develop similar tools in past years, though
+            none were built in a systematic or scalable manner. The most recent version of the self-developed LTS tool was authored by me from May 2024, started
+             with
+           a point-mass vehicle model and later evolved to a two-wheel (bicycle) vehicle model, now runs on a four-wheel model with 3 degrees of freedom. 
         </p>
         <br />
         <!-- This is an example of how you might use the image component -->
         <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
-          subtitle="Figure 1: Vehicle Dynamics Bicycle Vehicle Model"></image-component>
+          subtitle="Figure 1: Vehicle Dynamics Bicycle Vehicle Model (Christoph Allig, Gerd Wanielik, 2019)"></image-component>
         
       </div>
     </div>
@@ -225,38 +226,38 @@
     <sl-divider></sl-divider>
     <div>
       <div id="section-header-2">
-        <h2>2. Problem Definition</h2>
+        <h2>2 Problem Definition</h2>
         <p>
-          The demand for a Lap Time Simulation (LTS) tool in a motorsport team is significant,
-          as it allows detailed evaluation of a vehicle’s performance without the need for physical testing
-          — some of which can be difficult or costly to conduct. Such a tool helps identify suboptimal design
-          options early in the development process, reducing design iterations and overall costs. Therefore, it is 
-          essential for NUS FSAE to develop an in-house LTS tool to support race car design and setup decisions. 
+          The development of a Lap Time Simulation tool is of considerable importance to a motorsport engineering team, as it enables detailed evaluation of vehicle performance
+           without reliance on physical testing, some of which may be prohibitively difficult or costly to conduct. Such a tool facilitates the early identification of suboptimal
+            design decisions, thereby reducing design iteration cycles and associated development costs. It is therefore essential for the 
+          NUS FSAE Team to maintain and continuously improve an in-house LTS tool to support race car design and setup decisions throughout the development season.
         </p><p>
-          The previous version of the LTS tool, developed in the last season and named LTS25, was based on a two-wheel 
-          (bicycle) model with three degrees of freedom. Its algorithm relied heavily on iterative methods, resulting in 
-          long computation times per simulation run, with the processing load scaling with the number of mesh points in 
-          the track model. Moreover, due to its inability to handle multivariable problems directly, the tool required 
-          numerous simplifying assumptions, making it difficult to extend to more complex vehicle models. Consequently, 
-          a complete overhaul of the core algorithm was necessary to improve accuracy, efficiency, and modularity. 
-          The new Lap Time Simulation tool developed under this initiative was named LTS26. 
+          The previous iteration of the simulation tool, designated LTS25 and developed during the preceding season, was based on a two-wheel bicycle model with three degrees of freedom. 
+          Its underlying algorithm relied extensively on iterative computation, resulting in significant processing times per simulation run, with computational load scaling directly with the
+           number of discretisation points in the track model. Furthermore, due to its inherent inability to handle multivariable problems directly, 
+          the tool required numerous simplifying assumptions, rendering it difficult to extend to more complex vehicle representations. 
+        </p><p>
+          In addition, a single unified simulation configuration was applied across all competition events, including the Acceleration and Skidpad events, in which the vehicle operates 
+          primarily under steady-state conditions, as well as the Autocross and Endurance events, which involve considerably more complex vehicle dynamics. 
+          This approach forced the simulation to compromise accuracy in order to satisfy all use cases simultaneously, and was found to be computationally inefficient in practice.
         </p>
+
     </div>
   
     <!-- section 3 -->
     <sl-divider></sl-divider>
     <div>
       <div id="section-header-3">
-        <h2>3. Design Statement</h2>
+        <h2>3 Design Statement</h2>
         <p>
-          Last season, the team focused on improving the dynamic performance of the car and successfully 
-          finished all dynamic events in top 10. While this marks a substantial achievement, the team also 
-          sees a big room for improvement and hence decided to continue focusing on enhancing the car’s dynamics 
-          performance. Therefore, the team goal of this season was set as:  
+          In the preceding season, the team directed its efforts towards improving the dynamic performance of the vehicle, ultimately achieving top-ten finishes across all 
+          dynamic competition events. While this represents a significant milestone in the team's development trajectory, 
+          considerable scope for further improvement was identified. Accordingly, the team's overarching goal for the current season was established as:   
         </p><p style="text-align: center;">
           “Extract maximum performance through improved reliability” 
         </p><p>
-          To facilitate this, the goal for Lap Time Simulation department was set and therefore the Design Statement of the system:
+          In support of this objective, the specific goal for the Lap Time Simulation department was defined, forming the basis of the following design statement:
         </p><p style="text-align: center;">
           “Develop Lap Time Simulation software with correctness, accuracy and computational efficiency.”    
         </p>
@@ -267,149 +268,471 @@
     <sl-divider></sl-divider>
     <div>
       <div id="section-header-4">
-        <h2>4. Detail Design</h2>
-        <p>
-          LTS26 was constructed with more than 2000 lines of code on MATLAB. It utilizes Nonlinear Optimization 
-          method with the help of CasADi to evaluate vehicle performance at around 500 query points with extrapolation
-           to generalize it. It outputs insightful results for any dynamic events in the competition with less than half the computation time as 
-          the previous tool, including lap time, car speed over distance, accelerations, etc.
-        </p>
+        <h2>4 Methodology</h2>
         <div id="sub-section-4-1">
-          <h3>4.1 Revamped Structure</h3>
+          <h3>4.1 G-G-V Diagram</h3>
           <p>
-            One of the main reasons LTS25 having slow computation speed was that its processing time scaled
-             directly with the number of mesh points in the track model. For instance, a long track modelled with 
-             high precision could contain around 1,000 data points — meaning 1,000 individual calculations would need 
-             to be performed. At each of these points, the simulation independently evaluates the vehicle’s ability to 
-             corner, accelerate, and brake. As a result, the simulation output is updated sequentially, point by point, 
-             as the calculations progress. 
+            The tyre is the sole interface between the vehicle and the road surface, and consequently determines the magnitude of force that can be transmitted to generate acceleration or deceleration. 
+            The tyre's finite grip capacity may be utilised in the longitudinal direction, the lateral direction, or as a combination of both simultaneously. 
+            When the available friction is distributed between these two directions, the resultant force capability traces a circular boundary, a relationship commonly referred to as the Friction Circle. 
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS25 Simulation Structure.jpg"
-            subtitle="Figure 2: LTS25 Simulation Structure"></image-component> 
+            subtitle="Figure 4: Racing Tires Friction Circle (Marashian, 2018)"></image-component> 
           <p>
-            To reduce computation time, the new framework was designed to evaluate vehicle 
-            performance independently of the racetrack. Instead of calculating the vehicle’s behaviour point by point along the track, 
-            the simulation first generates a comprehensive summary of the vehicle’s performance for a given setup — known as the Performance 
-            Envelope — which can then be applied to any racetrack the team wishes to simulate. Since a race car’s maximum performance varies 
-            under different conditions, a generalized envelope is constructed by evaluating the vehicle across a range of operating conditions, 
-            followed by interpolation between these data points. Further details of this process are explained in the following sections.
+            While the Friction Circle defines the grip limits of the tyre in isolation, a race car's overall dynamic potential is further constrained by subsystems beyond the tyres alone. For an FSAE vehicle, 
+            the achievable acceleration is in certain conditions limited below the theoretical tyre grip ceiling. To translate tyre-level performance limits into actual vehicle behaviour, 
+            it is necessary to construct a G-G diagram for the vehicle as a whole. 
+            This diagram captures the combined influence of all major vehicle subsystems to represent the car's true performance envelope under a given operating condition.
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 3: LTS26 Simulation Structure"></image-component>
+            subtitle="Figure 5 G-G Diagram (Mclver, 1996)"></image-component>
+          </p><p>
+            Many of a vehicle's performance characteristics vary as a function of speed. Aerodynamic downforce, for instance, increases with the square of vehicle velocity, which in turn modifies the normal load 
+            acting on each tyre and consequently alters the shape of the G-G diagram. 
+            It is therefore necessary to account for the G-G diagram across the full speed range of the vehicle to obtain a complete and accurate representation of its dynamic capabilities.
           </p>
+          <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 6 G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
+          <p>
+            By constructing and combining the G-G diagrams evaluated across all speeds at which the vehicle may operate, a three-dimensional performance surface is obtained. This surface, known as the G-G-V diagram, 
+            describes the vehicle's dynamic limits comprehensively across all operating conditions. Ideally, the vehicle should operate along the boundary of this surface at all times.
+             Any operating point that falls within the interior of the diagram indicates that the vehicle's full performance potential is not being utilised. 
+          </p>
+          <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 7 G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
 
         <div id="sub-section-4-2">
-          <h3>4.2 What should a Performance Envelope be like</h3>
+          <h3>4.2 Numerical Optimization</h3>
           <p>
-            A Performance Envelope of a racing vehicle should comprehensively describe the maximum limits of its dynamic performance across 
-            all possible operating scenarios. These limits are constrained by both tire dynamics and the available traction from the powertrain 
-            system. In the design of LTS26, the Performance Envelope is represented by the vehicle’s G-G-V Diagram, which characterizes its 
-            acceleration capabilities in longitudinal and lateral directions at varying speeds, 
-            and to evaluate the vehicle’s performance limit, the racing tires should be focused first.
+            The vehicle system is governed by a set of highly interdependent equations involving numerous unknown variables, for which closed-form analytical solutions generally do not exist. 
+            Evaluating each equation independently would be both mathematically complex and computationally inefficient. 
+            In this work, the problem is instead formulated as a numerical optimisation problem, enabling simultaneous evaluation of all decision variables within a unified framework.
+          </p><p>
+            The class of problems addressed here falls under nonlinear programming, which concerns the solution of optimisation problems in which either the objective function or one or more of the
+             constraints are nonlinear in nature. In a two-dimensional context, the objective is to identify the global minimum of the cost function over a defined feasible domain.
+             The complexity of this problem grows substantially as the number of decision variables and constraints increases.
+          </p><p>
+            The numerical optimisation solver selected for this work is the Interior Point OPTimiser (IPOPT), an open-source software package designed for large-scale continuous nonlinear optimisation. 
+            IPOPT is formulated to identify local solutions to mathematical programmes with nonlinear objective functions and constraints. Relative to other non-commercial optimisation solvers, 
+            IPOPT demonstrates superior performance on nonlinear problems involving large numbers of variables, making it particularly well-suited to the vehicle dynamics application considered here.
           </p>
-          <div id="sub-section-4-2-1">
-            <h4>4.2.1 Tire Traction Circle </h4>
+          <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 8 Visualization of non-linear optimization (Britannica, 2025)"></image-component>
+          <p>
+            To perform nonlinear optimisation using IPOPT, the problem must first be formally defined by specifying the decision variables, objective function, equality and inequality constraints, initial guesses, and numerical bounds. 
+            This formulation is constructed symbolically using CasADi, 
+            an open-source tool for algorithmic differentiation and numerical optimisation, which interfaces directly with IPOPT to compute the optimised decision variables and the corresponding value of the objective function. 
+          </p>
+          <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 9 Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"></image-component>
+
+    <!-- section 5 -->
+    <sl-divider></sl-divider>
+    <div>
+      <div id="section-header-5">
+        <h2>5 Design and Prototyping</h2>
+        <div id="sub-section-5-1">
+          <h3>5.1 Design Overview</h3>
+          <div id="sub-section-5-1-1">
+            <h4>5.1.1 Simulation Structure Overview</h4>
             <p>
-              The tire is the only component that connects the vehicle to the ground, determining how much force can be transmitted to generate 
-              acceleration or deceleration. The tire’s grip, represented by its coefficient of friction, is limited and generally constant under 
-              steady-state conditions. This available grip can be utilized in the longitudinal direction (x-axis), the lateral direction (y-axis), 
-              or as a combination of both. Consequently, when the available friction is distributed between these two directions, the resultant force 
-              capability forms a circle. This relationship is known 
-              as the Friction Circle, a fundamental concept in racing tire dynamics.
+              LTS26 comprises over 3,000 lines of code implemented across MATLAB and Simulink, incorporating both a transient model and a quasi-steady-state model to address the distinct requirements of different competition event types. 
+              The tool produces comprehensive performance outputs for all dynamic competition events, while achieving a reduction in computation time of more than half relative to the preceding LTS25 tool.
+            </p><p>
+              The simulation programme is structured into two primary components: the Vehicle Model and the Dynamic Model. The Vehicle Model defines the mathematical representation of the race car's dynamics, 
+              consisting of a set of equations that describe the physical behaviour of the system. The Dynamic Model, in contrast, contains the algorithms that govern the execution of the simulation. 
+              During operation, the Dynamic Model repeatedly invokes the Vehicle Model to evaluate vehicle performance under varying conditions.
+               In this architecture, the Vehicle Model serves as the computational engine, while the Dynamic Model governs the conditions under which this engine is exercised. 
             </p>
             <br />
-              <image-component tag="image" source="assets\images\Racing Tires Friction Circle.jpg"
-            subtitle="Figure 4: Racing Tires Friction Circle (Marashian, 2018)"></image-component>
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 9 Dynamic Model versus Vehicle Model"></image-component> 
             
             </h4>
           </div>
-          
-          <div id="sub-section-4-2-2">
-            <h4>4.2.2 G-G Diagram</h4>
+          <div id="sub-section-5-1-2">
+            <h4>5.1.2 Revamped Structure</h4>
             <p>
-              While the Friction Circle defines the grip limits of the racing tires, a race car’s overall dynamic potential is also constrained by 
-              other subsystems beyond the tires. For an FSAE vehicle, its achievable acceleration is sometimes capped below the tire’s theoretical limit. 
-              To translate the tire-level performance limits into actual vehicle behaviour, it is necessary to construct a G–G diagram for the vehicle. 
-              This diagram captures the combined effects of all major systems — including aerodynamics, powertrain, 
-              and suspension kinematics — to represent the car’s true performance envelope. 
+              A primary contributor to the computational inefficiency of LTS25 was that its processing time scaled directly with the number of discretisation points in the track model. At each mesh point, 
+              the simulation independently evaluated the vehicle's cornering, 
+              acceleration, and braking capabilities, with the output updated point by point as the computation progressed.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\G-G Diagram.jpg"
-            subtitle="Figure 5: G-G Diagram (Mclver, 1996)"></image-component>
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 9 LTS25 Simulation Structure"></image-component>
+            <p>
+              To address this fundamental inefficiency, the simulation framework in LTS26 decouples vehicle performance evaluation from the track representation entirely. Rather than 
+              performing point-by-point calculations along the track, the simulation first constructs a comprehensive representation of the vehicle's performance, 
+              the Performance Envelope. This envelope characterises the vehicle's maximum capabilities across the full range of operating conditions.
+            </p>
+            <p>
+              Since vehicle performance varies with speed and other operating parameters, the envelope is constructed by evaluating the vehicle model at discrete operating points, followed by interpolation to
+               generalise the results across the continuous operating domain. Once established, this Performance Envelope can be applied to any track geometry without repeating the underlying
+               vehicle model computations, substantially reducing the total computational cost and significantly improving the flexibility and reusability of the simulation.
+            </p>
+            <br />
+            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            subtitle="Figure 9 LTS26 Simulation Structure"></image-component>
 
           </div>
-          <div id="sub-section-4-2-3">
-            <h4>4.2.3 G-G-V Diagram</h4>
+          
+          <div id="sub-section-5-1-3">
+            <h4>5.1.3 Course Differentiation</h4>
             <p>
-              Many of a vehicle’s performance characteristics vary with speed. For instance, aerodynamic downforce increases with the square of the 
-              vehicle’s velocity, which in turn affects the normal load on the tires and consequently alters the shape of the G–G diagram. As a result, 
-              the G–G diagram changes with speed, reflecting different performance limits at different operating conditions. Therefore, it is essential to 
-              account for the G–G diagrams across the entire speed range of the vehicle to
-               obtain a complete and accurate representation of its overall performance.
+              In the Acceleration and Skidpad events, the vehicle operates predominantly under steady-state conditions that is relatively easier to model comparing to the Autocross and Endurance events, 
+              which involve continuous and simultaneous variation of both longitudinal and lateral accelerations,
+               representing a considerably more complex dynamic environment.
+            </p>
+            <p>
+              Given that each event type presents unique modelling requirements, the simulation framework in LTS26 was further differentiated beyond the structural overhaul described above. Specifically, 
+              the Acceleration and Braking simulations are implemented using a transient model in Simulink, Skidpad to be simulated using a steady-state model, 
+              and the Autocross and Endurance simulations are implemented using a quasi-steady-state model in MATLAB scripts. This separation improves both simulation accuracy and numerical stability.
+            </p>            
+
+          </div>
+        <div id="sub-section-5-2">
+          <h3>5.2 Transient Model Simulation</h3>
+          <div id="sub-section-5-2-1">
+            <h4>5.2.1 Acceleration Simulation</h4>
+            <p>
+              During acceleration, the performance of the race car is governed primarily by two competing limiting factors: tyre traction forces and powertrain driving forces. When the torque delivered by the 
+              powertrain exceeds the maximum traction force available at the driven tyres, wheel spin occurs and tyre grip becomes the binding constraint. Conversely, when tyre grip exceeds the available
+               powertrain output, acceleration becomes power-limited. Accurate prediction of the
+               spatial distribution of these two limiting regimes along the acceleration track is therefore essential for optimising vehicle design parameters and improving event performance.
+            </p>
+            <p>
+              As the vehicle accelerates, its instantaneous speed increases continuously, which in turn affects both the motor torque output and the aerodynamic
+               forces acting on the vehicle, which vary with the square of velocity. For this reason, vehicle speed is selected as the primary feedback variable within the simulation loop.
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
+            subtitle="Figure 6: Simplified Design Loop for Acceleration Simulation"></image-component>
+            </h4>
+          </div> 
+          <div id="sub-section-5-2-2">
+            <h4>5.2.2 Braking Simulation</h4>
             <p>
-              By combining the G-G Diagram at all speeds that a vehicle could possibly run at, it is possible to obtain a full three-dimensional graph 
-              that covers the vehicle’s dynamic limit in all conditions, the G-G-V Diagram. 
+              During braking, vehicle performance is similarly governed by the interaction between tyre forces and the applied braking force. However, since the braking force generated by the hydraulic system can 
+              be considered sufficiently large relative to the tyre's capacity to transmit longitudinal force, 
+              it is treated as effectively unlimited within this model. Under this assumption, braking performance is simplified to be tyre-limited throughout the event.
+            </p>
+            <p>
+              As with the acceleration simulation, vehicle speed is adopted as the primary feedback variable, 
+              as it directly governs both the aerodynamic loading and the tyre behaviour at each instant during the braking event.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\G-G-V Diagram.jpg"
-            subtitle="Figure 7: G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
-            <p>
-              Ideally, the vehicle should operate along the boundary of this diagram, and any point within it indicates that the driver is not extracting 
-              the car’s full potential. Therefore, the objective of the simulation is to accurately determine the 
-              G–G–V diagram for a given setup of the FSAE race car — which fundamentally defines its Performance Envelope.
-            </p>
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Simplified Design Loop for Braking Simulation"></image-component>
             </h4>
           </div> 
         </div>
-        <div id="sub-section-4-3"></div> 
-          <h3>4.3 How to obtain the Performance Envelope</h3>
+
+        <div id="sub-section-5-3"></div> 
+          <h3>5.3 Quasi-Steady-State Simulation</h3>
+          <div id="sub-section-5-3-1"> </div>
+            <h4>5.3.1 Vehicle Model</h4>
+            <p>
+            During cornering, the centripetal forces required to sustain the vehicle's curved motion are generated collectively by the four tyres, each contributing forces of varying magnitude and 
+            direction depending on the prevailing operating conditions. 
+            The tyre force at each corner is a function of slip angle, slip ratio, normal load, inclination angle, and tyre-specific parameters characterised from experimental data.
+            </p>
+              \[
+                F_{\text{Tire}} = \boldsymbol{f}(\text{Slip Angle},\ \text{Slip Ratio},\ \text{Tire Load},\ \text{Inclination Angle},\ \text{Tire Parameters})\tag{5.1}
+              \]
+
           <p>
-            To derive a Performance Envelope that accurately represents the FSAE vehicle’s dynamic performance limits, 
-            the steady-state behaviour of the vehicle at a 
-            given speed must first be evaluated, ultimately leading to the construction of the G–G–V diagram. 
-          </p>
-          <p>
-            Since the vehicle system consists of numerous interdependent equations and unknown variables, evaluating 
-            each equation individually would be both complex and computationally inefficient. Instead, the problem is 
-            solved using numerical optimization, which allows simultaneous evaluation of multiple decision variables.  
-            In this work, an open-source tool for nonlinear optimization and algorithmic differentiation tool, CasADi, 
-            was used (Joel A E Andersson, Joris Gillis, Greg Horn, James B Rawlings, Moritz Diehl, 2019),
-             coupled with the Interior-Point Optimization Method (IPOPT) as the chosen solver.
-          </p>
-          <p>
-            Nonlinear programming is the process of solving an optimization problem where some of the constraints are not linear equalities 
-            or the objective function is not a linear function. In the context of a 2D problem, the goal is to find the global minimum point over a 
-            specific domain. The problem becomes significantly more complex as the number of variables and constraints increases.
+            To determine the resultant tyre forces, several intermediate quantities must be evaluated. Among the most critical is the slip angle, which governs the generation
+             of lateral tyre force and is defined based on the decomposition of the wheel's velocity vector into longitudinal and lateral components relative to the tyre contact patch. 
           </p>
           <br />
-              <image-component tag="image" source="assets\images\Visualization of non-linear optimization.jpg"
-            subtitle="Figure 8: Visualization of non-linear optimization (Britannica, 2025)"></image-component>
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Lateral Force versus Slip Angle"></image-component>
           <p>
-            To perform nonlinear optimization using a solver such as IPOPT, the problem must first be formulated by defining the decision variables, 
-            objective function, constraints, initial guesses, and numerical bounds. CasADi then symbolically constructs the optimization problem and 
-            interfaces with IPOPT to compute the optimized decision variables and their corresponding objective function value. 
+            Slip angle is defined based on the decomposition of the velocity vector into longitudinal and lateral components relative to the tire.
           </p>
-          <br />
-              <image-component tag="image" source="assets\images\Functional block diagram of the nonlinear optimization methodology.jpg"
-            subtitle="Figure 9: Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"
-            style="max-width: 70% !important; height: auto; display: block; margin: 0 auto;"></image-component>
+            \[
+              \alpha_{FR} = -\delta + \arctan\!\left(\frac{V_y + \omega_r \cdot a}{V_x + \omega_r \cdot d/2}\right) \tag{5.2}
+            \]
+
+            \[
+              \alpha_{FL} = -\delta + \arctan\!\left(\frac{V_y + \omega_r \cdot a}{V_x - \omega_r \cdot d/2}\right) \tag{5.3}
+            \]
+
+            \[
+              \alpha_{RR} = \arctan\!\left(\frac{V_y - \omega_r \cdot b}{V_x + \omega_r \cdot d/2}\right) \tag{5.4}
+            \]
+
+            \[
+              \alpha_{RL} = \arctan\!\left(\frac{V_y - \omega_r \cdot b}{V_x - \omega_r \cdot d/2}\right) \tag{5.5}
+            \]
+
           <p>
-            Therefore, to obtain accurate vehicle dynamics simulation results using CasADi, all input parameters must be correctly defined at each 
-            iteration. In this case, the objective function consists of a comprehensive set of vehicle dynamics equations that describe the behaviour 
-            of the model. Meanwhile, the initial guesses and optimization constraints are 
-            defined based on the actual physical limits and operating conditions of the race car.
+            where \( \delta \) is steering angle, \( \omega_r \) is vehicle's yaw rate, 
+            \( a \) is distance from vehicle's center of gravity (CG) to the front axle, 
+            \( b \) is distance from vehicle's CG to the rear axle, 
+            \( d \) is vehicle's track.
           </p>
-          <br />
-              <image-component tag="image" source="assets\images\Flow chart of vehicle performance evaluation.jpg"
-            subtitle="Figure 10: Flow chart of vehicle performance evaluation"
-            style="max-width: 70% !important; height: auto; display: block; margin: 0 auto;"></image-component>
+          <p>
+            Decomposed velocity vector, \( V_x \) and \( V_y \) are derived from the vehicle’s speed and body slip angle \( \beta \):
+          </p>
+          \[
+            V_x = V \cdot \cos(\beta) \tag{5.6}
+          \]
+
+          \[
+            V_y = V \cdot \sin(\beta) \tag{5.7}
+          \]
+
+          <p>
+            A second critical input to the tyre force model is the normal load at each corner, 
+            which arises from four contributing sources.
+          </p>
+
+          \[
+            F_z = \frac{\text{Mass} \times 9.81}{4} \tag{5.8}
+          \]
+
+          \[
+            F_{\text{Aero}} = \frac{1}{4} \times \left(0.5 \times \text{Density} \times CL 
+            \times \text{Area} \times V^2\right) \tag{5.9}
+          \]
+
+          \[
+            F_{\text{Lat_LT}} = F_z \times \frac{A_y \times H_{\text{CG}}}{9.81 \times d} \tag{5.10}
+          \]
+
+          \[
+            F_{\text{Long_LT}} = F_z \times \frac{A_x \times H_{\text{CG}}}{9.81 \times \text{wheelbase}} \tag{5.11}
+          \]
+
+          <p>
+            Where, <em>Mass</em> is the vehicle's total mass, <em>Density</em> is the density of 
+            fluid (in this case, air), \( CL \) is the Coefficient of Lift, <em>Area</em> is the 
+            vehicle's frontal area, \( V \) is the vehicle's speed value, \( A_y \) is the vehicle's 
+            Lateral Acceleration, \( A_x \) is the vehicle's Longitudinal Acceleration, \( H_{\text{CG}} \) 
+            is the height of the vehicle's CG, and \( d \) is the vehicle's track length. Here we 
+            assume that the vehicle has equally distributed static weight and aerodynamic downforce 
+            across four wheels.
+          </p>
+          <p>
+            Assuming the vehicle is negotiating a left-hand turn while accelerating, the resulting 
+            normal load at the rear-right tyre is accordingly given by:
+          </p>
+
+          \[
+            F_{zrr} = F_z + F_{\text{Aero}} + F_{\text{Lat\_LT}} + F_{\text{Long\_LT}} \tag{5.12}
+          \]
+
+          <p>
+            Sign conventions are adjusted accordingly for the remaining wheel positions. Tyre 
+            inclination angle is assumed to be zero in the current model, given its relatively 
+            minor contribution to tyre force generation at this level of modelling fidelity.
+          </p>
+
+          <p>
+            Tyre characteristics are defined using pre-fitted parameters derived from experimental 
+            measurements and are treated as fixed known inputs to the optimisation problem.
+          </p>
+
+          <p>
+            Upon evaluating the longitudinal and lateral forces at each of the four tyres, the 
+            complete four-wheel vehicle dynamic geometry is referenced to compute the resultant 
+            longitudinal force, lateral force, and yaw moment with respect to the fixed vehicle 
+            coordinate frame.
+          </p>
+          \[
+            \begin{aligned}
+              F_y &= F_{yFR} \cdot \cos(\delta) + F_{yFL} \cdot \cos(\delta) + F_{xFR} \cdot \sin(\delta) + F_{xFL} \cdot \sin(\delta) \\
+                  &\quad + F_{yRL} + F_{yRR}
+            \end{aligned} \tag{5.13}
+          \]
+
+          \[
+            \begin{aligned}
+              F_x &= F_{xFR} \cdot \cos(\delta) + F_{xFL} \cdot \cos(\delta) - F_{yFR} \cdot \sin(\delta) - F_{yFL} \cdot \sin(\delta) \\
+                  &\quad + F_{xRL} + F_{xRR}
+            \end{aligned} \tag{5.14}
+          \]
+
+          \[
+            \begin{aligned}
+              M_z &= a \cdot \big(F_{xFR} \cdot \sin(\delta) + F_{xFL} \cdot \sin(\delta) + F_{yFR} \cdot \cos(\delta) + F_{yFL} \cdot \cos(\delta)\big) \\
+                  &\quad - b \cdot \big(F_{yRL} + F_{yRR}\big) \\
+                  &\quad + \frac{d}{2} \cdot \big(F_{xFR} \cdot \cos(\delta) - F_{xFL} \cdot \cos(\delta)\big) \\
+                  &\quad + \frac{d}{2} \cdot \big(F_{xRR} - F_{xRL}\big) \\
+                  &\quad + \frac{d}{2} \cdot \big(F_{yFL} \cdot \sin(\delta) - F_{yFR} \cdot \sin(\delta)\big)
+            \end{aligned} \tag{5.15}
+          \]
+
+          <p>
+            The vehicle accelerations with respect to the path-tangential coordinate frame are 
+            then given by:
+          </p>
+
+          \[
+            a_x = \frac{1}{m} \cdot \Big(F_y \sin(\beta) + F_x \cos(\beta) - \text{Drag}\Big) \tag{5.16}
+          \]
+
+          \[
+            a_y = \frac{1}{m} \cdot \Big(F_y \cos(\beta) - F_x \sin(\beta)\Big) \tag{5.17}
+          \]
+
+          <p>
+            At this stage, several variables remain undetermined, specifically the steering angle 
+            \( \delta \), body slip angle \( \beta \), yaw rate \( \omega_r \), and the slip ratios 
+            at each tyre. These quantities are treated as decision variables within the optimisation 
+            problem. To ensure internal consistency between the assumed and computed accelerations, 
+            residual equality constraints are introduced, enforcing that the acceleration values used 
+            in the load transfer calculations are consistent with those produced by the vehicle model 
+            upon solution:
+          </p>
+
+          \[
+            A_{x_{Res}} = A_x - A_{x_{in}} \tag{5.18}
+          \]
+
+          \[
+            A_{y_{Res}} = A_y - A_{y_{in}} \tag{5.19}
+          \]
+          
         </div>
+          <div id="sub-section-5-3-2"> </div>
+            <h4>5.3.2 Dynamic Model</h4>
+            <div id="sub-section-5-3-2-1"> </div>
+              <h5>5.3.2.1 Steady-State Model</h5>
+              <p>
+                As the goal being constructing a G-G diagram that captures the vehicle’s maximum potentials, combinations of longitudinal and lateral accelerations values
+                 need to be output from simulation to cover all possible scenarios during dynamic events. 
+                This will be achieved by performing numerical optimization using the Vehicle Model formulated above with specific set of decision variables.
+              </p><p>
+                A fundamental consideration in the design of the steady-state model is that numerical optimisation, by formulation, permits only a single objective variable to be 
+                minimised or maximised per solver call, and the remaining unknowns are determined as a consequence of satisfying the imposed constraints. The core algorithmic challenge 
+                is therefore to design a structured approach that ensures both A_x and A_y are simultaneously 
+                driven towards their maximum achievable values, despite the solver being capable of directly optimising only one at a time.
+              </p><p>
+                The first design iteration addressed this by decomposing the problem into a sequential series of optimisation calls. Since tyre grip is most efficiently utilised when 
+                directed along a single axis, the maximum and minimum achievable longitudinal accelerations are first determined in isolation by setting lateral acceleration to zero. 
+                These two optimisation problems define the feasible range of A_x values. The programme subsequently generates a uniform mesh of A_x values between these bounds, and for
+                 each discrete value imposes A_x as a fixed constraint 
+                while maximising A_y as the objective. This yields a set of optimised (A_x, A_y) pairs that collectively trace the G-G boundary.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram First Prototype Illustration"></image-component>
+              <p>
+                While conceptually straightforward, this formulation required a minimum of three separate nonlinear optimisation problem configurations, increasing implementation 
+                complexity. More critically, the rectangular mesh imposed on A_x did not align naturally with the circular geometry of the G-G boundary, resulting in query points near 
+                the pure braking and pure acceleration extremes being sparsely distributed relative to the combined acceleration region. This mismatch caused a high rate of optimisation failure at the 
+                boundary regions where the feasible set is most constrained, and produced uneven resolution across the G-G diagram.
+              </p><p>
+                To address these shortcomings, a revised formulation was adopted in which the optimisation objective is no longer defined in terms of either 
+                longitudinal or lateral acceleration independently, but instead in terms of a scalar grip factor P, defined as:
+              </p>
+              \[
+                \left| P \right| = \sqrt{A_x^2 + A_y^2} \tag{5.20}
+              \]
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: G-G Diagram Second Prototype Illustration"></image-component>
+              <p>
+                The programme defines an angular sweep variable θ uniformly distributed over [−π, π]. This polar formulation naturally distributes query points evenly along the G-G
+                 boundary, reduces the problem to a single unified optimisation structure, and eliminates the need to pre-determine the A_x bounds. The angular mesh increment was selected 
+                 by balancing diagram resolution against computational cost, and initial guesses at each
+                 instance are warm-started from the preceding solution to exploit the expected smoothness of the boundary and improve convergence reliability.
+              </p><p>
+                A full description of the numerical optimization setup can be found in Appendix A.6. 
+              </p>
+            <div id="sub-section-5-3-2-2"> </div>
+              <h5>5.3.2.2 Quasi-Steady-State Model</h5>
+              <p>
+                To simulate the complete performance of a race car competing in events such as Autocross and Endurance, the Steady-State Model is repeated systematically 
+                across the full operational speed range of the vehicle. 
+                This procedure constructs a G-G-V diagram that characterises the vehicle's dynamic limits across all operating conditions.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Simulated G-G Diagram at different speeds"></image-component>
+              <p>
+                The G-G diagram computations were performed at speeds ranging from 10 m/s up to the vehicle's theoretical maximum speed, with a uniform increment of 1 m/s. 
+                Speeds below 10 m/s were excluded from direct computation since it’s uncommon to occur in FSAE competition, and the vehicle has significant different behaviours 
+                at such low speeds. To account for this excluded regime, linear extrapolation was applied 
+                to the computed results immediately above the 10 m/s boundary to estimate the vehicle's performance below this speed. 
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Interpolation of G-G-V Diagram"></image-component>
+            <div id="sub-section-5-3-2-3"> </div>
+              <h5>5.3.2.3 Dynamic Event Simulation</h5>
+              <p>
+                With the vehicle's performance limits established through the G-G-V diagram, it becomes possible to predict the vehicle's dynamic capabilities on an actual 
+                competition track, as encountered during the Autocross and Endurance events. The simulation proceeds in two stages: first, a Boundary Speed Profile (BSP) is 
+                generated to represent the maximum achievable cornering speed at each point along the track; second, the maximum achievable speed 
+                accounting for the constraints imposed by acceleration and braking is computed, yielding the Limit Speed Profile (LSP). 
+              </p><p>
+                To construct the BSP, the programme determines the maximum achievable lateral acceleration A_y at each speed value from the interpolated G-G-V diagram, representing the vehicle's
+                 peak cornering capability at that speed. The minimum achievable turn radius for each speed-acceleration combination is then computed as:
+              </p>
+              \[
+                R = \frac{V^2}{A_y} \tag{5.21}
+              \]
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Cornering Speed against Radius"></image-component>
+              <p>
+                The discrete results are subsequently interpolated to generalise the relationship across all cornering scenarios. The programme maps the cornering speed to 
+                the corresponding turn radius for each track segment with a turn radius below 50 metres; for segments with a turn radius exceeding this threshold, 
+                the vehicle's maximum speed is assigned directly. The BSP is thereby obtained by mapping the cornering speed values with track curvatures.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Track Model and Boundary Speed Profile"></image-component>
+              <p>
+                The simulation then proceeds to determine the vehicle's maximum achievable longitudinal acceleration at each track position, in order to predict the highest 
+                attainable speed at the subsequent location following acceleration. Given the speed and turn radius prescribed by the BSP, and with the lateral acceleration
+                 accordingly known, the corresponding longitudinal acceleration A_x is extracted from the G-G-V diagram. Since the G-G-V diagram encompasses both acceleration 
+                 and braking regimes, a given combination of speed and lateral acceleration yields two distinct values of A_x — one positive, corresponding to acceleration, 
+                 and one negative, corresponding to braking. 
+                The G-G-V diagram is therefore partitioned into two separate regions to enable independent extraction of acceleration and braking data.
+              </p><p>
+                Two sequential iteration loops are implemented to update the speed values derived from the Boundary Speed Profile. The first loop evaluates the maximum achievable 
+                longitudinal acceleration at each instance using the acceleration Performance Envelope, while the second loop applies 
+                the corresponding braking deceleration. The complete Limit Speed Profile is thereby obtained as the final output of the dynamic event simulation.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Performance Envelope for Acceleration"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Performance Envelope for Braking"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Limit Speed Profile"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Race Track with Speed Visualization"></image-component>
+              <p>
+                In addition to speed values, more vehicle parameters can be simulated to provide further insights to the team.
+              </p>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Simulation of Slip Angle Variations"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Simulation of Slip Ratio Validations"></image-component>
+              <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 6: Simulation of common vehicle parameters"></image-component>
+              
+            
+
+
+
       </div>
 <!-- section 5 -->
     <br />
