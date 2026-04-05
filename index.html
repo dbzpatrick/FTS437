@@ -256,7 +256,10 @@
         <br />
         <!-- This is an example of how you might use the image component -->
         <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
-          subtitle="Figure 1: Vehicle Dynamics Bicycle Vehicle Model (Christoph Allig, Gerd Wanielik, 2019)"></image-component>
+          subtitle="Figure 1 Vehicle Dynamics Bicycle Vehicle Model (Christoph Allig, Gerd Wanielik, 2019)"></image-component>
+        <br />
+        <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
+          subtitle="Figure 2 Vehicle Dynamics 4-Wheel Model (Ahmed, 2022)"></image-component>
         
       </div>
     </div>
@@ -319,7 +322,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS25 Simulation Structure.jpg"
-            subtitle="Figure 4: Racing Tires Friction Circle (Marashian, 2018)"></image-component> 
+            subtitle="Figure 3 Racing Tires Friction Circle (Marashian, 2018)"></image-component> 
           <p>
             While the Friction Circle defines the grip limits of the tyre in isolation, a race car's overall dynamic potential is further constrained by subsystems beyond the tyres alone. For an FSAE vehicle, 
             the achievable acceleration is in certain conditions limited below the theoretical tyre grip ceiling. To translate tyre-level performance limits into actual vehicle behaviour, 
@@ -328,7 +331,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 5 G-G Diagram (Mclver, 1996)"></image-component>
+            subtitle="Figure 4 G-G Diagram (Mclver, 1996)"></image-component>
           </p><p>
             Many of a vehicle's performance characteristics vary as a function of speed. Aerodynamic downforce, for instance, increases with the square of vehicle velocity, which in turn modifies the normal load 
             acting on each tyre and consequently alters the shape of the G-G diagram. 
@@ -336,7 +339,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 6 G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
+            subtitle="Figure 5 G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
           <p>
             By constructing and combining the G-G diagrams evaluated across all speeds at which the vehicle may operate, a three-dimensional performance surface is obtained. This surface, known as the G-G-V diagram, 
             describes the vehicle's dynamic limits comprehensively across all operating conditions. Ideally, the vehicle should operate along the boundary of this surface at all times.
@@ -344,7 +347,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 7 G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
+            subtitle="Figure 6 G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
 
         <div id="sub-section-4-2">
           <h3>4.2 Numerical Optimization</h3>
@@ -363,7 +366,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 8 Visualization of non-linear optimization (Britannica, 2025)"></image-component>
+            subtitle="Figure 7 Visualization of non-linear optimization (Britannica, 2025)"></image-component>
           <p>
             To perform nonlinear optimisation using IPOPT, the problem must first be formally defined by specifying the decision variables, objective function, equality and inequality constraints, initial guesses, and numerical bounds. 
             This formulation is constructed symbolically using CasADi, 
@@ -371,7 +374,7 @@
           </p>
           <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 9 Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"></image-component>
+            subtitle="Figure 8 Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"></image-component>
 
     <!-- section 5 -->
     <sl-divider></sl-divider>
@@ -406,7 +409,7 @@
             </p>
             <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 9 LTS25 Simulation Structure"></image-component>
+            subtitle="Figure 10 LTS25 Simulation Structure"></image-component>
             <p>
               To address this fundamental inefficiency, the simulation framework in LTS26 decouples vehicle performance evaluation from the track representation entirely. Rather than 
               performing point-by-point calculations along the track, the simulation first constructs a comprehensive representation of the vehicle's performance, 
@@ -419,7 +422,7 @@
             </p>
             <br />
             <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
-            subtitle="Figure 9 LTS26 Simulation Structure"></image-component>
+            subtitle="Figure 11 LTS26 Simulation Structure"></image-component>
 
           </div>
           
@@ -453,7 +456,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simplified Design Loop for Acceleration Simulation"></image-component>
+            subtitle="Figure 12 Simplified Design Loop for Acceleration Simulation"></image-component>
             </h4>
           </div> 
           <div id="sub-section-5-2-2">
@@ -469,7 +472,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simplified Design Loop for Braking Simulation"></image-component>
+            subtitle="Figure 13 Simplified Design Loop for Braking Simulation"></image-component>
             </h4>
           </div> 
         </div>
@@ -493,7 +496,10 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Lateral Force versus Slip Angle"></image-component>
+            subtitle="Figure 14 Lateral Force versus Slip Angle"></image-component>
+          <br />
+              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+            subtitle="Figure 15 3DOF Vehicle Body Model (Wei, 2016)"></image-component>
           <p>
             Slip angle is defined based on the decomposition of the velocity vector into longitudinal and lateral components relative to the tire.
           </p>
@@ -665,7 +671,7 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram First Prototype Illustration"></image-component>
+            subtitle="Figure 16 G-G Diagram First Prototype Illustration"></image-component>
               <p>
                 While conceptually straightforward, this formulation required a minimum of three separate nonlinear optimisation problem configurations, increasing implementation 
                 complexity. More critically, the rectangular mesh imposed on A_x did not align naturally with the circular geometry of the G-G boundary, resulting in query points near 
@@ -680,7 +686,7 @@
               \]
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram Second Prototype Illustration"></image-component>
+            subtitle="Figure 17 G-G Diagram Second Prototype Illustration"></image-component>
               <p>
                 The programme defines an angular sweep variable θ uniformly distributed over [−π, π]. This polar formulation naturally distributes query points evenly along the G-G
                  boundary, reduces the problem to a single unified optimisation structure, and eliminates the need to pre-determine the A_x bounds. The angular mesh increment was selected 
@@ -698,7 +704,7 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simulated G-G Diagram at different speeds"></image-component>
+            subtitle="Figure 18 Simulated G-G Diagram at different speeds"></image-component>
               <p>
                 The G-G diagram computations were performed at speeds ranging from 10 m/s up to the vehicle's theoretical maximum speed, with a uniform increment of 1 m/s. 
                 Speeds below 10 m/s were excluded from direct computation since it’s uncommon to occur in FSAE competition, and the vehicle has significant different behaviours 
@@ -707,7 +713,8 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Interpolation of G-G-V Diagram"></image-component>
+            subtitle="Figure 19 Interpolation of G-G-V Diagram"></image-component>
+
             <div id="sub-section-5-3-2-3"> </div>
               <h5>5.3.2.3 Dynamic Event Simulation</h5>
               <p>
@@ -724,7 +731,7 @@
               \]
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Cornering Speed against Radius"></image-component>
+            subtitle="Figure 20 Cornering Speed against Radius"></image-component>
               <p>
                 The discrete results are subsequently interpolated to generalise the relationship across all cornering scenarios. The programme maps the cornering speed to 
                 the corresponding turn radius for each track segment with a turn radius below 50 metres; for segments with a turn radius exceeding this threshold, 
@@ -732,7 +739,7 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Track Model and Boundary Speed Profile"></image-component>
+            subtitle="Figure 21 Track Model and Boundary Speed Profile"></image-component>
               <p>
                 The simulation then proceeds to determine the vehicle's maximum achievable longitudinal acceleration at each track position, in order to predict the highest 
                 attainable speed at the subsequent location following acceleration. Given the speed and turn radius prescribed by the BSP, and with the lateral acceleration
@@ -747,28 +754,28 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Performance Envelope for Acceleration"></image-component>
+            subtitle="Figure 22 Performance Envelope for Acceleration"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Performance Envelope for Braking"></image-component>
+            subtitle="Figure 23 Performance Envelope for Braking"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Limit Speed Profile"></image-component>
+            subtitle="Figure 24 Limit Speed Profile"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Race Track with Speed Visualization"></image-component>
+            subtitle="Figure 25 Race Track with Speed Visualization"></image-component>
               <p>
                 In addition to speed values, more vehicle parameters can be simulated to provide further insights to the team.
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simulation of Slip Angle Variations"></image-component>
+            subtitle="Figure 26 Simulation of Slip Angle Variations"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simulation of Slip Ratio Validations"></image-component>
+            subtitle="Figure 27 Simulation of Slip Ratio Validations"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Simulation of common vehicle parameters"></image-component>
+            subtitle="Figure 28 Simulation of common vehicle parameters"></image-component>
               
         </div>
           <div id="sub-section-5-3-3"> </div>
@@ -807,7 +814,7 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: Ackermann Geometry Comparison"></image-component>
+            subtitle="Figure 29 Ackermann Geometry Comparison"></image-component>
               <p>
                 The Ackermann geometry is characterised using Optimum Kinematic software, which generates the relationship between the left and right steering angles and the percentage 
                 of maximum steering input as a function of the expected cornering radius. Polynomial curve fitting is subsequently applied to this data to establish a continuous 
@@ -834,17 +841,17 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram Comparison with Ackermann"></image-component>
+            subtitle="Figure 30 G-G Diagram Comparison with Ackermann"></image-component>
               <p>
                 Simulation results comparing the vehicle performance with and without the Ackermann steering correction were evaluated. Upon overlaying the two outputs, 
                 the resulting G-G diagrams were found to be almost entirely coincident, with differences manifesting only at the level of decimal precision. 
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram without Ackermann Simulation"></image-component>
+            subtitle="Figure 31 G-G Diagram without Ackermann Simulation"></image-component>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram with Ackermann Simulation"></image-component>
+            subtitle="Figure 32 G-G Diagram with Ackermann Simulation"></image-component>
               <p>
                 It was further observed that the introduction of the Ackermann steering feature introduces additional numerical 
                 complexity into the optimisation problem, arising from the higher-order polynomial curve fitting function used to represent the steering geometry. 
@@ -875,7 +882,7 @@
               </p>
               <br />
               <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 6: G-G Diagram Comparison with Brake Bias"></image-component>
+            subtitle="Figure 33 G-G Diagram Comparison with Brake Bias"></image-component>
               <p>
                 More critically, the fixed brake bias introduces a discrete regime switch into the simulation model, causing the objective landscape presented to the optimiser to contain a 
                 discontinuity at which the gradient of the braking force with respect to the decision variables is undefined. This manifests visibly in the G-G diagram as the inward concavity
@@ -900,7 +907,7 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
-            subtitle="Figure 11: Simulated Speed and Longitudinal G in Acceleration Event"></image-component>
+            subtitle="Figure 34 Simulated Speed and Longitudinal G in Acceleration Event"></image-component>
           <p>
             The sensitivity of the simulation to vehicle setup parameters was further examined by varying the Final Drive Ratio (FDR). The results confirm that the simulation responds 
             appropriately to changes in 
@@ -908,10 +915,10 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
-            subtitle="Figure 11: Comparison of FDR in Acceleration Event"></image-component>
+            subtitle="Figure 35 Comparison of FDR in Acceleration Event"></image-component>
           <br />
               <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
-            subtitle="Figure 11: Speed Difference over Distance for different FDR"></image-component>
+            subtitle="Figure 36 Speed Difference over Distance for different FDR"></image-component>
           <p>
             To validate the accuracy of the model, the simulated speed profile was compared against telemetry data recorded during the Formula SAE Michigan 2025 Acceleration event. 
             Although the recorded telemetry 
@@ -919,7 +926,7 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
-            subtitle="Figure 11: Comparison of Simulated Speed and Vehicle Data"></image-component>
+            subtitle="Figure 37 Comparison of Simulated Speed and Vehicle Data"></image-component>
           <p>
             Comparison of the simulated and measured speed profiles reveals a localised discrepancy concentrated in the early phase of acceleration. As shown in the speed error plot, 
             the divergence is not sustained throughout the run but is instead confined to the initial distance window. This behaviour is attributed to wheel spin observed in the physical
@@ -928,7 +935,7 @@
           </p>
           <br />
               <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
-            subtitle="Figure 12: Speed Prediction Error over Distance"></image-component>
+            subtitle="Figure 38 Speed Prediction Error over Distance"></image-component>
 
         <div id="sub-section-6-2"></div>
           <h3>6.2 Corner Simulation Validation</h3>
@@ -944,7 +951,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
-            subtitle="Figure 12: Flow chart of optimization in loop"></image-component>
+            subtitle="Figure 39 Flow chart of optimization in loop"></image-component>
             <p>
               Several additional design measures were implemented to improve the optimisation success rate. At each query point, the initial guesses for the decision variables are 
               set to the optimised values obtained from the immediately preceding query point, rather than from fixed arbitrary values. Additional measures include the adaptive modification
@@ -956,7 +963,7 @@
             <h4>6.2.2 Autocross and Endurance Simulation Validation</h4>
             <br />
               <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
-            subtitle="Figure 12: Simulation Results Comparison"></image-component>
+            subtitle="Figure 40 Simulation Results Comparison"></image-component>
             <p>
               The simulation results were validated by comparison against telemetry data recorded from the NUS FSAE vehicle of the preceding season, designated R25E, 
               during the Endurance event at the 2025 Formula SAE Electric Competition. To ensure a fair and consistent comparison, the LTS26 simulation 
@@ -964,7 +971,7 @@
             </p>
             <br />
               <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
-            subtitle="Figure 12: Speed Profile Validation"></image-component>
+            subtitle="Figure 41 Speed Profile Validation"></image-component>
             <p>
               The simulated speed profile was found to be in close agreement 
               with the competition telemetry data, both in terms of the overall driving pattern and the peak cornering speeds achieved along the track. 
