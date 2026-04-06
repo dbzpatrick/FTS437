@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>FTS437: Vehicle Model Lap Time Simulation Development and Optimization</title>
+  <title>Dai Baizhou's FYP</title>
   <link rel="icon" href="./favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/light.css" />
@@ -35,7 +35,7 @@
 
 <!-- FIXED LEFT SIDEBAR -->
   <div id="toc-sidebar">
-    <h2>Contents</h2>
+    <h2>Patrick's FYP</h2>
     <sl-tree>
       <sl-tree-item><a href="#" data-page="page-cover">Cover</a></sl-tree-item>
       <sl-tree-item><a href="#" data-page="page-frontmatter">Front Matter</a></sl-tree-item>
@@ -220,7 +220,7 @@
     <!-- ABSTRACT -->
     <div class="page-section" id="page-abstract">
       <h2>Abstract</h2>
-      <p>This report presents the development of LTS26, the second generation of an in-house Lap Time Simulation (LTS) tool for the NUS Formula SAE Electric vehicle. Built upon a four-wheel vehicle model with three degrees of freedom, LTS26 represents a substantial advancement over its predecessor LTS25, which employed a simpler two-wheel bicycle model. The key architectural innovation of LTS26 is the decoupling of vehicle performance evaluation from track representation through the construction of a Performance Envelope — a pre-computed characterisation of the vehicle's dynamic limits across its full operating range. This approach reduces computation time by more than half relative to LTS25, while simultaneously supporting a more complex vehicle model.</p>
+      <p>This report presents the development of LTS26, the second generation of an in-house Lap Time Simulation (LTS) tool for the NUS Formula SAE Electric vehicle. Built upon a four-wheel vehicle model with three degrees of freedom, LTS26 represents a substantial advancement over its predecessor LTS25, which employed a simpler two-wheel bicycle model. The key architectural innovation of LTS26 is the decoupling of vehicle performance evaluation from track representation through the construction of a Performance Envelope, a pre-computed characterisation of the vehicle's dynamic limits across its full operating range. This approach reduces computation time by more than half relative to LTS25, while simultaneously supporting a more complex vehicle model.</p>
       <p>The simulation framework differentiates between event types: a transient Simulink model handles the Acceleration and Braking events, while a quasi-steady-state MATLAB model addresses the Autocross and Endurance events through construction of a G-G-V diagram. Numerical optimisation using IPOPT, interfaced through CasADi for symbolic automatic differentiation, is employed to solve the nonlinear vehicle dynamics equations at each operating point. Subsystem models for aerodynamics, Ackermann steering geometry, and brake bias are integrated and evaluated for their influence on simulation fidelity and numerical stability.</p>
       <p>Validation against telemetry data from the 2025 Formula SAE Electric Competition demonstrates close agreement in speed profiles for both straight-line and cornering events. Remaining discrepancies are attributed to powertrain thermal degradation and the inherent limitations of the quasi-steady-state assumption under transient driving conditions. Future development directions include improving optimisation convergence reliability and progressive expansion of the vehicle model towards higher degrees of freedom.</p>
     </div>
