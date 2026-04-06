@@ -1,5 +1,3 @@
-# Basic template for iDP report
+# Check out my Final Year Project!
 
-## Tools used
-- Grid.js for generating table
-- Shoelace for custom web-components
+Access my report at https://dbzpatrick.github.io/FTS437/
