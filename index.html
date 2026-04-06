@@ -205,14 +205,23 @@
     <sl-tree-item expanded>
       <a href="#appendix">Appendix</a>
       <sl-tree-item>
-        <a href="#appendix-a1">A.1 LTS26 Full Codes</a>
+        <a href="#appendix-a1">A.1 Purpose of Lap Time Simulation</a>
       </sl-tree-item>
       <sl-tree-item>
-        <a href="#appendix-a2">A.2 Optimization Solver Selection</a>
+        <a href="#appendix-a2">A.2 LTS26 Full Codes</a>
       </sl-tree-item>
       <sl-tree-item>
-        <a href="#appendix-a3">A.3 Purpose of Lap Time Simulation</a>
+        <a href="#appendix-a3">A.3 LTS26 Variables List</a>
       </sl-tree-item>
+      <sl-tree-item>
+        <a href="#appendix-a1">A.4 Optimization Variables List</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#appendix-a2">A.5 IPOPT Solver Configuration</a>
+      </sl-tree-item>
+      <sl-tree-item>
+        <a href="#appendix-a3">A.6 Performance Envelope Optimization Setup</a>
+      </sl-tree-item>      
     </sl-tree-item>
 
     <sl-tree-item>
@@ -258,7 +267,7 @@
         <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
           subtitle="Figure 1 Vehicle Dynamics Bicycle Vehicle Model (Christoph Allig, Gerd Wanielik, 2019)"></image-component>
         <br />
-        <image-component tag="image" source="assets/images/Vehicle Dynamics Bicycle Vehicle Model.jpg"
+        <image-component tag="image" source="assets/images/VD4wheel.png"
           subtitle="Figure 2 Vehicle Dynamics 4-Wheel Model (Ahmed, 2022)"></image-component>
         
       </div>
@@ -321,7 +330,7 @@
             When the available friction is distributed between these two directions, the resultant force capability traces a circular boundary, a relationship commonly referred to as the Friction Circle. 
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS25 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\Racing Tires Friction Circle.jpg"
             subtitle="Figure 3 Racing Tires Friction Circle (Marashian, 2018)"></image-component> 
           <p>
             While the Friction Circle defines the grip limits of the tyre in isolation, a race car's overall dynamic potential is further constrained by subsystems beyond the tyres alone. For an FSAE vehicle, 
@@ -330,7 +339,7 @@
             This diagram captures the combined influence of all major vehicle subsystems to represent the car's true performance envelope under a given operating condition.
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\G-G Diagram.jpg"
             subtitle="Figure 4 G-G Diagram (Mclver, 1996)"></image-component>
           </p><p>
             Many of a vehicle's performance characteristics vary as a function of speed. Aerodynamic downforce, for instance, increases with the square of vehicle velocity, which in turn modifies the normal load 
@@ -338,7 +347,7 @@
             It is therefore necessary to account for the G-G diagram across the full speed range of the vehicle to obtain a complete and accurate representation of its dynamic capabilities.
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
             subtitle="Figure 5 G-G Diagram at different speeds (Patrucco, 2025)"></image-component>
           <p>
             By constructing and combining the G-G diagrams evaluated across all speeds at which the vehicle may operate, a three-dimensional performance surface is obtained. This surface, known as the G-G-V diagram, 
@@ -346,7 +355,7 @@
              Any operating point that falls within the interior of the diagram indicates that the vehicle's full performance potential is not being utilised. 
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\G-G-V Diagram.jpg"
             subtitle="Figure 6 G-G-V Diagram (Andrei-Cristian Pridie, Csaba Antonya, 2021)"></image-component>
 
         <div id="sub-section-4-2">
@@ -365,7 +374,7 @@
             IPOPT demonstrates superior performance on nonlinear problems involving large numbers of variables, making it particularly well-suited to the vehicle dynamics application considered here.
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\Visualization of non-linear optimization.jpg"
             subtitle="Figure 7 Visualization of non-linear optimization (Britannica, 2025)"></image-component>
           <p>
             To perform nonlinear optimisation using IPOPT, the problem must first be formally defined by specifying the decision variables, objective function, equality and inequality constraints, initial guesses, and numerical bounds. 
@@ -373,7 +382,7 @@
             an open-source tool for algorithmic differentiation and numerical optimisation, which interfaces directly with IPOPT to compute the optimised decision variables and the corresponding value of the objective function. 
           </p>
           <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\Functional block diagram of the nonlinear optimization methodology.jpg"
             subtitle="Figure 8 Functional block diagram of the nonlinear optimization methodology (Fouzia Ferdous, ABM Harun-ur Rashid, 2024)"></image-component>
 
     <!-- section 5 -->
@@ -395,7 +404,7 @@
                In this architecture, the Vehicle Model serves as the computational engine, while the Dynamic Model governs the conditions under which this engine is exercised. 
             </p>
             <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\Dynamic Model versus Vehicle Model.jpg"
             subtitle="Figure 9 Dynamic Model versus Vehicle Model"></image-component> 
             
             </h4>
@@ -408,7 +417,7 @@
               acceleration, and braking capabilities, with the output updated point by point as the computation progressed.
             </p>
             <br />
-            <image-component tag="image" source="assets\images\LTS26 Simulation Structure.jpg"
+            <image-component tag="image" source="assets\images\LTS25 Simulation Structure.jpg"
             subtitle="Figure 10 LTS25 Simulation Structure"></image-component>
             <p>
               To address this fundamental inefficiency, the simulation framework in LTS26 decouples vehicle performance evaluation from the track representation entirely. Rather than 
@@ -455,7 +464,7 @@
                forces acting on the vehicle, which vary with the square of velocity. For this reason, vehicle speed is selected as the primary feedback variable within the simulation loop.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Simplified Design Loop for Acceleration Simulation.jpg"
             subtitle="Figure 12 Simplified Design Loop for Acceleration Simulation"></image-component>
             </h4>
           </div> 
@@ -471,7 +480,7 @@
               as it directly governs both the aerodynamic loading and the tyre behaviour at each instant during the braking event.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Simplified Design Loop for Braking Simulation.jpg"
             subtitle="Figure 13 Simplified Design Loop for Braking Simulation"></image-component>
             </h4>
           </div> 
@@ -495,11 +504,9 @@
              of lateral tyre force and is defined based on the decomposition of the wheel's velocity vector into longitudinal and lateral components relative to the tyre contact patch. 
           </p>
           <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 14 Lateral Force versus Slip Angle"></image-component>
-          <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
-            subtitle="Figure 15 3DOF Vehicle Body Model (Wei, 2016)"></image-component>
+              <image-component tag="image" source="assets\images\Lateral Force versus Slip Angle.jpg"
+            subtitle="Figure 14 Lateral Force versus Slip Angle (Tyre Slip Angle, 2017)"></image-component>
+          
           <p>
             Slip angle is defined based on the decomposition of the velocity vector into longitudinal and lateral components relative to the tire.
           </p>
@@ -525,6 +532,9 @@
             \( b \) is distance from vehicle's CG to the rear axle, 
             \( d \) is vehicle's track.
           </p>
+          <br />
+              <image-component tag="image" source="assets\images\3DOF Vehicle Body Model.jpg"
+            subtitle="Figure 15 3DOF Vehicle Body Model (Wei, 2016)"></image-component>
           <p>
             Decomposed velocity vector, \( V_x \) and \( V_y \) are derived from the vehicle’s speed and body slip angle \( \beta \):
           </p>
@@ -670,7 +680,7 @@
                 while maximising A_y as the objective. This yields a set of optimised (A_x, A_y) pairs that collectively trace the G-G boundary.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
             subtitle="Figure 16 G-G Diagram First Prototype Illustration"></image-component>
               <p>
                 While conceptually straightforward, this formulation required a minimum of three separate nonlinear optimisation problem configurations, increasing implementation 
@@ -685,7 +695,7 @@
                 \left| P \right| = \sqrt{A_x^2 + A_y^2} \tag{5.20}
               \]
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
             subtitle="Figure 17 G-G Diagram Second Prototype Illustration"></image-component>
               <p>
                 The programme defines an angular sweep variable θ uniformly distributed over [−π, π]. This polar formulation naturally distributes query points evenly along the G-G
@@ -703,7 +713,7 @@
                 This procedure constructs a G-G-V diagram that characterises the vehicle's dynamic limits across all operating conditions.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Simulated G-G Diagram at different speeds.jpg"
             subtitle="Figure 18 Simulated G-G Diagram at different speeds"></image-component>
               <p>
                 The G-G diagram computations were performed at speeds ranging from 10 m/s up to the vehicle's theoretical maximum speed, with a uniform increment of 1 m/s. 
@@ -712,7 +722,7 @@
                 to the computed results immediately above the 10 m/s boundary to estimate the vehicle's performance below this speed. 
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Interpolation of G-G-V Diagram.jpg"
             subtitle="Figure 19 Interpolation of G-G-V Diagram"></image-component>
 
             <div id="sub-section-5-3-2-3"> </div>
@@ -730,7 +740,7 @@
                 R = \frac{V^2}{A_y} \tag{5.21}
               \]
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Cornering Speed against Radius.jpg"
             subtitle="Figure 20 Cornering Speed against Radius"></image-component>
               <p>
                 The discrete results are subsequently interpolated to generalise the relationship across all cornering scenarios. The programme maps the cornering speed to 
@@ -738,7 +748,7 @@
                 the vehicle's maximum speed is assigned directly. The BSP is thereby obtained by mapping the cornering speed values with track curvatures.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Track Model and Boundary Speed Profile.jpg"
             subtitle="Figure 21 Track Model and Boundary Speed Profile"></image-component>
               <p>
                 The simulation then proceeds to determine the vehicle's maximum achievable longitudinal acceleration at each track position, in order to predict the highest 
@@ -753,28 +763,28 @@
                 the corresponding braking deceleration. The complete Limit Speed Profile is thereby obtained as the final output of the dynamic event simulation.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Performance Envelope for Acceleration.jpg"
             subtitle="Figure 22 Performance Envelope for Acceleration"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Performance Envelope for Braking.jpg"
             subtitle="Figure 23 Performance Envelope for Braking"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Limit Speed Profile.jpg"
             subtitle="Figure 24 Limit Speed Profile"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\speed on track.jpg"
             subtitle="Figure 25 Race Track with Speed Visualization"></image-component>
               <p>
                 In addition to speed values, more vehicle parameters can be simulated to provide further insights to the team.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\slip angle.jpg"
             subtitle="Figure 26 Simulation of Slip Angle Variations"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\slip ratio.jpg"
             subtitle="Figure 27 Simulation of Slip Ratio Validations"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\telemetry.jpg"
             subtitle="Figure 28 Simulation of common vehicle parameters"></image-component>
               
         </div>
@@ -813,7 +823,7 @@
                 The simulation of Ackermann geometry effects on vehicle dynamic performance is therefore necessary for accurate modelling. 
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\Ackermann Geometry Comparisons.jpg"
             subtitle="Figure 29 Ackermann Geometry Comparison"></image-component>
               <p>
                 The Ackermann geometry is characterised using Optimum Kinematic software, which generates the relationship between the left and right steering angles and the percentage 
@@ -840,17 +850,17 @@
                 This now enables the comparison between different Ackermann geometry as shown below.
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\ackerman compare.jpg"
             subtitle="Figure 30 G-G Diagram Comparison with Ackermann"></image-component>
               <p>
                 Simulation results comparing the vehicle performance with and without the Ackermann steering correction were evaluated. Upon overlaying the two outputs, 
                 the resulting G-G diagrams were found to be almost entirely coincident, with differences manifesting only at the level of decimal precision. 
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\no ackerman.jpg"
             subtitle="Figure 31 G-G Diagram without Ackermann Simulation"></image-component>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\ackerman.jpg"
             subtitle="Figure 32 G-G Diagram with Ackermann Simulation"></image-component>
               <p>
                 It was further observed that the introduction of the Ackermann steering feature introduces additional numerical 
@@ -881,7 +891,7 @@
                 lower than the theoretical maximum achievable when both axles are allowed to operate simultaneously at their respective traction limits. 
               </p>
               <br />
-              <image-component tag="image" source="assets\images\G-G Diagram at different speeds.jpg"
+              <image-component tag="image" source="assets\images\brake bias.jpg"
             subtitle="Figure 33 G-G Diagram Comparison with Brake Bias"></image-component>
               <p>
                 More critically, the fixed brake bias introduces a discrete regime switch into the simulation model, causing the objective landscape presented to the optimiser to contain a 
@@ -906,7 +916,7 @@
             force profiles demonstrate behaviour consistent with the expected physical characteristics of the vehicle under full-throttle conditions. 
           </p>
           <br />
-              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\accel sim.jpg"
             subtitle="Figure 34 Simulated Speed and Longitudinal G in Acceleration Event"></image-component>
           <p>
             The sensitivity of the simulation to vehicle setup parameters was further examined by varying the Final Drive Ratio (FDR). The results confirm that the simulation responds 
@@ -914,10 +924,10 @@
             this parameter, producing distinct speed profiles that reflect the trade-off between peak torque delivery and top speed associated with different gear ratios. 
           </p>
           <br />
-              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\fdr compare.jpg"
             subtitle="Figure 35 Comparison of FDR in Acceleration Event"></image-component>
           <br />
-              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\fdr speed diff.jpg"
             subtitle="Figure 36 Speed Difference over Distance for different FDR"></image-component>
           <p>
             To validate the accuracy of the model, the simulated speed profile was compared against telemetry data recorded during the Formula SAE Michigan 2025 Acceleration event. 
@@ -925,7 +935,7 @@
             exhibits localised fluctuations attributable to sensor noise, the overall trend and critical performance features are in close agreement with the simulation output.
           </p>
           <br />
-              <image-component tag="image" source="assets\images\First Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\accel validate.jpg"
             subtitle="Figure 37 Comparison of Simulated Speed and Vehicle Data"></image-component>
           <p>
             Comparison of the simulated and measured speed profiles reveals a localised discrepancy concentrated in the early phase of acceleration. As shown in the speed error plot, 
@@ -934,7 +944,7 @@
             tyre–road contact with no slip beyond the tyre model's steady-state limits, and therefore does not replicate the transient speed loss associated with a wheelspin event.
           </p>
           <br />
-              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\speed error.png"
             subtitle="Figure 38 Speed Prediction Error over Distance"></image-component>
 
         <div id="sub-section-6-2"></div>
@@ -950,7 +960,7 @@
               total number of optimisation attempts, providing a quantitative metric for assessing the overall credibility and reliability of each simulation run.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\Flow chart of optimization in loop.jpg"
             subtitle="Figure 39 Flow chart of optimization in loop"></image-component>
             <p>
               Several additional design measures were implemented to improve the optimisation success rate. At each query point, the initial guesses for the decision variables are 
@@ -962,7 +972,7 @@
           <div id="sub-section-6-2-2"></div>
             <h4>6.2.2 Autocross and Endurance Simulation Validation</h4>
             <br />
-              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\Simulation Results Comparison.jpg"
             subtitle="Figure 40 Simulation Results Comparison"></image-component>
             <p>
               The simulation results were validated by comparison against telemetry data recorded from the NUS FSAE vehicle of the preceding season, designated R25E, 
@@ -970,7 +980,7 @@
               was conducted under conditions identical to those of R25E, and the results were additionally compared against the outputs of the preceding LTS25 model.
             </p>
             <br />
-              <image-component tag="image" source="assets\images\Second Prototype Visualization.jpg"
+              <image-component tag="image" source="assets\images\Speed Profile Validation.jpg"
             subtitle="Figure 41 Speed Profile Validation"></image-component>
             <p>
               The simulated speed profile was found to be in close agreement 
@@ -1038,43 +1048,396 @@
             throughout a competition lap and providing a stronger foundation for future development of the tool.
           </p>
               
+<!-- appendix -->
+    <br />
+    <br />
+    <sl-divider></sl-divider>
+      <div id="appendix"></div>
+        <h2>Appendix</h2>
+        <div id="appendix-a-1"></div>
+          <h3>A.1 Purpose of Lap Time Simulation</h3>
+            <p>
+              Lap Time Simulation (LTS) is a computational modelling tool that predicts the performance of a race car on a given circuit by simulating its motion through 
+              the track under the physical constraints imposed by the vehicle's dynamic limits. By numerically solving the equations governing vehicle, the simulation 
+              determines the minimum time in which the vehicle can
+               complete a lap, along with the corresponding speed profile, acceleration history, and other performance metrics at every point along the track.
+            </p><p>
+              The need for such a tool in a competitive motorsport environment stems from the fundamental challenge that physical testing is inherently limited in scope, cost, 
+              and repeatability. Conducting on-track experiments to evaluate every possible combination of vehicle setup parameters is neither time-efficient nor financially 
+              viable, particularly for a university-based student team with constrained resources and limited track access. Lap time simulation addresses this challenge 
+              directly by enabling the team to evaluate and 
+              compare many design and setup configurations in a purely computational environment, at a fraction of the time and cost of physical testing.
+            </p><p>
+              Beyond setup optimisation, lap time simulation serves as a powerful design tool during the vehicle development phase. By quantifying the sensitivity of lap time to individual
+               design parameters, the simulation allows engineers to identify which components and systems have the greatest influence on overall performance, enabling design effort 
+               and resource allocation to be directed towards the areas of highest impact. This capability is particularly valuable in the context of Formula SAE, 
+               where the vehicle is redesigned substantially 
+              each season and the team must make critical design decisions under significant time pressure with limited empirical data available.
+            </p><p>
+              Furthermore, lap time simulation provides a consistent and objective benchmark against which design changes can be assessed. Unlike physical testing, which is subject to variability
+               introduced by driver behaviour, track conditions, and environmental factors, a simulation produces deterministic results under precisely controlled conditions, making it possible 
+               to isolate the effect of a single design variable with a degree of rigour that is practically unachievable through track testing alone. For these reasons, lap time simulation 
+               has become an indispensable tool in professional 
+              motorsport engineering, and its development and continuous improvement represents a strategic priority for the NUS FSAE Team.
+            </p>
+
+        <div id="appendix-a-2"></div>
+          <h3>A.2 LTS26 Full Codes</h3>
+            <p>
+              Full work of LTS26 simulation program can be found on GitHub:
+            </p><p>
+              https://github.com/nusfsae/NUS_LTS/tree/main/LTS%2026
+            </p>
+
+        <div id="appendix-a-3"></div>
+        <h3>A.3 LTS26 Variables List</h3>
+
+        <h4>Vehicle Parameters:</h4>
+        <table style="width:100%; border-collapse:collapse; margin-bottom: 2rem;">
+          <thead>
+            <tr>
+              <th style="border:1px solid var(--sl-color-neutral-300, #ccc); padding: 8px 12px; text-align:left; white-space:nowrap;">Variable</th>
+              <th style="border:1px solid var(--sl-color-neutral-300, #ccc); padding: 8px 12px; text-align:left;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(a\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Longitudinal distance from the centre of gravity to the front axle</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(b\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Longitudinal distance from the centre of gravity to the rear axle</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(d\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Vehicle track width</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(\delta_{\text{in}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Steering angle of the inner front wheel</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(\delta_{\text{out}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Steering angle of the outer front wheel</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(dx\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Longitudinal velocity component in the fixed reference frame</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(dy\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Lateral velocity component in the fixed reference frame</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(\alpha_{FR},\,\alpha_{FL},\,\alpha_{RR},\,\alpha_{RL}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Tyre slip angles at the front-right, front-left, rear-right, and rear-left corners respectively</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">Drag</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Aerodynamic drag force acting in the direction opposing vehicle motion</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">Lift</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Total aerodynamic downforce acting on the vehicle</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">AeroF</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Aerodynamic downforce distributed to the front axle</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">AeroR</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Aerodynamic downforce distributed to the rear axle</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(F_z\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Static normal load per wheel under unladen conditions</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">latLT</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Lateral load transfer arising from cornering acceleration</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">longLT</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Longitudinal load transfer arising from acceleration or braking</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(F_{xFL},\,F_{xFR},\,F_{xRL},\,F_{xRR}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Longitudinal tyre forces at the front-left, front-right, rear-left, and rear-right corners respectively</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(F_{yFL},\,F_{yFR},\,F_{yRL},\,F_{yRR}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Lateral tyre forces at the front-left, front-right, rear-left, and rear-right corners respectively</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(M_z\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Total yaw moment acting about the vehicle centre of gravity</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(P_{\text{pwt}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Power demand at the rear wheels required to sustain the current acceleration state</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(p_{\text{inner}},\,p_{\text{outer}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Polynomial coefficients fitted to the Ackermann steering geometry data for the inner and outer wheel steering angles respectively</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Optimisation Parameters:</h4>
+        <table style="width:100%; border-collapse:collapse; margin-bottom: 2rem;">
+          <thead>
+            <tr>
+              <th style="border:1px solid var(--sl-color-neutral-300, #ccc); padding: 8px 12px; text-align:left; white-space:nowrap;">Variable</th>
+              <th style="border:1px solid var(--sl-color-neutral-300, #ccc); padding: 8px 12px; text-align:left;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">Gnum</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Number of angular subdivisions used to discretise the G-G diagram sweep</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(V\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Vehicle speed at which the G-G diagram is evaluated</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">GG</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Structure of arrays storing the optimised output values across all angular instances</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">AngleRange</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Angular range of the combined acceleration direction, defined from +90° to −90° clockwise</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(\theta\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Current angular direction being solved in the G-G diagram sweep</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(p\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Scalar grip factor representing the magnitude of the total acceleration vector — the primary optimisation objective</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(A_{x,\text{in}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Input longitudinal acceleration component supplied to the vehicle model</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(A_{y,\text{in}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Input lateral acceleration component supplied to the vehicle model</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(A_{x,\text{res}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Residual longitudinal acceleration — constrained to zero to ensure consistency between assumed and computed accelerations</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(A_{y,\text{res}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Residual lateral acceleration — constrained to zero to ensure consistency between assumed and computed accelerations</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(\text{bias_res}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Residual brake bias — constrained to zero during braking to enforce the prescribed front-to-rear braking force ratio</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(F_{z,\min}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Minimum normal force that each tyre must maintain, enforcing physical contact with the road surface</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(P_{\text{pwt}}\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Powertrain power output constraint, enforcing the vehicle's peak power limit</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(M_z = 0\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Net yaw moment about the centre of gravity constrained to zero, as required for steady-state cornering equilibrium</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(a_y - V\dot{\psi} = 0\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Lateral acceleration constrained to equal the product of speed and yaw rate, as required for steady-state circular motion</td></tr>
+            <tr><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;white-space:nowrap;font-family:monospace;">\(F_{xFL} \leq 0,\; F_{xFR} \leq 0\)</td><td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Front wheel longitudinal forces constrained to be non-positive, reflecting that the front axle is non-driven</td></tr>
+          </tbody>
+        </table>
+
+        <div id="appendix-a-4"></div>
+        <h3>A.4 Optimisation Solver Selection</h3>
+        <p>
+          The selection of an appropriate numerical optimisation solver is a critical decision, as the solver's algorithmic 
+          characteristics directly determine the reliability, computational efficiency, and scalability of the overall 
+          simulation framework. Several candidate solvers were evaluated against the requirements of this application, 
+          which involves large-scale continuous nonlinear programming with tightly coupled constraints, a non-convex 
+          objective landscape arising from the combined-slip tyre model, and the need for repeated solution across a 
+          dense grid of operating points.
+        </p>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom: 2rem;">
+          <thead>
+            <tr>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Solver</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Type</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Licence</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Gradient Method</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Large-Scale Performance</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Suitability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">FMINCON</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">SQP / Interior point</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Free (MATLAB)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Finite difference</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Poor — scales badly with problem size</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Not suitable</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">SNOPT</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">SQP</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Commercial</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Analytic / finite difference</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Good on smooth problems</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Limited</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">KNITRO</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">SQP / Interior point</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Commercial</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Analytic</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Excellent</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Licence required</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">Genetic algorithm</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Metaheuristic</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Free</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Derivative-free</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Poor — high function evaluation count</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Not suitable</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;font-weight:bold;">IPOPT</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Interior point</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Free</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Analytic (via CasADi)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Excellent</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-weight:bold;">Selected</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          FMINCON, available natively within MATLAB, was the most immediately accessible candidate. However, its reliance 
+          on finite difference approximations for gradient computation introduces numerical noise that degrades convergence 
+          reliability on problems with many nonlinear constraints, and its computational performance scales poorly with 
+          problem size, rendering it unsuitable for the four-wheel vehicle model considered here.
+        </p>
+        <p>
+          SNOPT employs a sequential quadratic programming (SQP) approach and exhibits fast local convergence on smooth 
+          problems, but requires a feasible or near-feasible initial point to initialise reliably, a condition difficult 
+          to guarantee consistently across the full G-G-V operating domain. KNITRO offers robust handling of large-scale 
+          non-convex programmes and would represent a technically strong candidate, but its commercial licensing presents 
+          a practical barrier within a student team with limited budget.
+        </p>
+        <p>
+          Derivative-free metaheuristic methods such as genetic algorithms, while capable of exploring non-convex search 
+          spaces without gradient information, require a prohibitively large number of function evaluations to converge 
+          when the optimisation must be repeated across hundreds of operating points.
+        </p>
+        <p>
+          IPOPT was selected on several grounds. As an open-source interior point solver designed specifically for 
+          large-scale nonlinear optimisation, it imposes no licensing restrictions and integrates directly with CasADi, 
+          which supplies exact first and second derivative information through symbolic automatic differentiation, 
+          eliminating finite difference noise and enabling efficient exploitation of the sparse problem structure. 
+          Relative to the alternatives considered, IPOPT demonstrated superior convergence reliability and computational 
+          efficiency for this class of problem. Its extensive configurability further provides the flexibility required 
+          to tune solver behaviour as the vehicle model evolves, making it a practical and sustainable long-term 
+          foundation for the simulation framework.
+        </p>
+
+        <div id="appendix-a-5"></div>
+        <h3>A.5 IPOPT Solver Configuration</h3>
+        <p>
+          The following setup for IPOPT was chosen to adapt to the vehicle model, enabling a minimal number of failures 
+          and faster computation speeds.
+        </p>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom: 2rem;">
+          <thead>
+            <tr>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;font-family:monospace;">Parameter</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Description</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.print_time</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Toggles the output of computation time taken per solver call</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">False</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.ipopt.print_level</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Controls the verbosity level of IPOPT solver output</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">1</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.ipopt.tol</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Primary convergence tolerance; the optimisation is considered converged when the scaled primal and dual infeasibilities fall below this value</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">1e-6</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.ipopt.acceptable_tol</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Acceptable convergence tolerance for the solver to consider a solution satisfactory</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">1e-6</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.ipopt.acceptable_iter</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Number of consecutive successful iterations required before the problem is considered solved</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">15</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">opts.ipopt.max_iter</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Maximum number of iterations permitted before the solver is forcibly terminated</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">5000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div id="appendix-a-6"></div>
+        <h3>A.6 Performance Envelope Optimisation Setup</h3>
+        <p>
+          In the G-G diagram calculation of LTS26, the programme iterates the angle of the vector \( P \) to ensure a 
+          uniformly meshed ellipse is generated. To facilitate this design, the numerical optimisation setup for this 
+          iteration loop is as follows.
+        </p>
+        <p>
+          Vector \( P \) is the decision variable to be maximised, as it represents the grip level of each iterated 
+          instance on the G-G diagram.
+        </p>
+        <p>
+          The following constraints are imposed to reduce the size of the feasible region and improve computational efficiency:
+        </p>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom: 2rem;">
+          <thead>
+            <tr>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Variable</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Constraint</th>
+              <th style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;text-align:left;">Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(\delta\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Within maximum steering angle by design</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Bounded by the physical steering rack travel limit</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(\beta\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( |\beta| \leq 20°\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">FSAE vehicles are not expected to undergo high body slip angles</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(S_x\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( |S_x| \leq 0.1\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Peak tyre friction occurs below a slip ratio of 0.1</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(\alpha\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( |\alpha| \leq 10°\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">FSAE vehicles are not expected to reach higher tyre slip angles</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(\dot{\psi}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( |\dot{\psi}| \leq 180°/\text{s}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Upper bound on physically realisable yaw rate</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(F_z\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( F_z \geq 50\,\text{N}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Ensures all tyres remain in contact with the ground throughout the simulation</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(a_y - V\dot{\psi}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( = 0\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Enforces steady-state lateral equilibrium at every instance in the simulation</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(P_{\text{pwt}}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( \leq 80\,\text{kW}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Peak powertrain output capped at the FSAE competition power limit</td>
+            </tr>
+            <tr>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;font-family:monospace;">\(F_{xFL},\, F_{xFR}\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">\( \leq 0\)</td>
+              <td style="border:1px solid var(--sl-color-neutral-300,#ccc);padding:8px 12px;">Front longitudinal forces are non-positive, consistent with a rear-wheel-driven vehicle</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          Initial guesses for all decision variables are set to zero at the first operating point to ensure the problem 
+          is feasible. For subsequent operating points, the solved decision variable values from the immediately preceding 
+          optimisation result are used as warm-start initial guesses to exploit the expected smoothness of the solution 
+          across the operating domain.
+        </p>
+        <p>
+          The initial guess for the grip factor \( P \) is set to 30% of the maximum grip value as a conservative 
+          starting point, accounting for the lower aerodynamic downforce and hence reduced tyre grip at low speeds. 
+          For speeds above 20 m/s, the initial guess is increased to reflect the higher grip levels achievable at 
+          elevated speeds.
+        </p>
 
 
-
-    <!-- references -->
+<!-- references -->
     <div id="references" class="references">
       <sl-divider></sl-divider>
       <h2>References</h2>
       <ul>
         <li>
-          Andrei-Cristian Pridie, Csaba Antonya. (14 June, 2021). 
-          The Theoretical Study of an Interconnected Suspension System for a Formula Student Car. Applied Sciences.
+          Ahmed, A. A. (2022). LINEAR QUADRATIC REGULATOR CONTROLLER (LQR) FOR VEHICLE YAW RATE EVALUATION.
+          <em>International World Energy Conference.</em>
         </li>
         <li>
-          Britannica, E. (13 11, 2025). Retrieved from Encyclopædia Britannica: 
-          https://www.britannica.com/science/optimization/Nonlinear-programming#/media/1/430575/2673
+          Andrei-Cristian Pridie, Csaba Antonya. (14 June, 2021). The Theoretical Study of an Interconnected
+          Suspension System for a Formula Student Car. <em>Applied Sciences.</em>
         </li>
         <li>
-          Christoph Allig, Gerd Wanielik. (2019). 
-          Extending the vehicular network simulator Artery in order to generate synthetic data for collective perception.
+          Britannica, E. (13 November, 2025). Nonlinear programming. Retrieved from Encyclopædia Britannica:
+          <a href="https://www.britannica.com/science/optimization/Nonlinear-programming#/media/1/430575/2673" target="_blank">
+            https://www.britannica.com/science/optimization/Nonlinear-programming
+          </a>
         </li>
         <li>
-          Fouzia Ferdous, ABM Harun-ur Rashid. (2024). 
-          Optimization for Spectral and Power Characteristics of Bicolour LED Driver.
+          Christoph Allig, Gerd Wanielik. (2019). Extending the vehicular network simulator Artery in order to
+          generate synthetic data for collective perception.
         </li>
         <li>
-          Joel A E Andersson, Joris Gillis, Greg Horn, James B Rawlings, Moritz Diehl. (2019). CasADi: 
-          A software framework for nonlinear optimization and optimial control. Mathematical Programming Computation, 1-36.
+          Deshmukh, A. (2021). Anti-Ackermann Steering System of Formula Student car.
+          <em>International Research Journal of Engineering and Technology.</em>
         </li>
         <li>
-          Marashian, A. (5 October, 2018). What is 'Circle of Friction' ? 
-          Retrieved from ResearchGate: https://www.researchgate.net/post/What-is-Circle-of-Friction
+          Fouzia Ferdous, ABM Harun-ur Rashid. (2024). Optimization for Spectral and Power Characteristics of
+          Bicolour LED Driver.
         </li>
         <li>
-          Mclver, J. (November, 1996). The GG Diagram. Retrieved from HP Wizard: https://hpwizard.com/gg-diagram.html
+          Joel A E Andersson, Joris Gillis, Greg Horn, James B Rawlings, Moritz Diehl. (2019). CasADi: A software
+          framework for nonlinear optimization and optimal control. <em>Mathematical Programming Computation,</em> 1–36.
         </li>
         <li>
-          Patrucco, A. (2025). Lap Time Simulation: steps 5,6 and 7, and some divagation.
+          Marashian, A. (5 October, 2018). What is 'Circle of Friction'? Retrieved from ResearchGate:
+          <a href="https://www.researchgate.net/post/What-is-Circle-of-Friction" target="_blank">
+            https://www.researchgate.net/post/What-is-Circle-of-Friction
+          </a>
+        </li>
+        <li>
+          Mclver, J. (November, 1996). The GG Diagram. Retrieved from HP Wizard:
+          <a href="https://hpwizard.com/gg-diagram.html" target="_blank">
+            https://hpwizard.com/gg-diagram.html
+          </a>
+        </li>
+        <li>
+          Patrucco, A. (2025). Lap Time Simulation: steps 5, 6 and 7, and some divagation.
+        </li>
+        <li>
+          Tyre Slip Angle. (29 May, 2017). Retrieved from Suspension Secrets.
+        </li>
+        <li>
+          Wei, L. (2016). Vehicle State Estimation Based on Minimum Model Error Criterion Combining with Extended
+          Kalman Filter. <em>Journal of the Franklin Institute.</em>
         </li>
       </ul>
     </div>
